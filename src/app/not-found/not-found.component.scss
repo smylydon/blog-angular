@@ -1,0 +1,13 @@
+.container div {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.message {
+  margin: auto;
+  font-size: 3rem;
+}
