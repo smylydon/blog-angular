@@ -1,1 +1,23 @@
-<p>add-post works!</p>
+<section>
+  <h2>Add a New Post</h2>
+  <form [formGroup]="postForm" (ngSubmit)="submit()">
+    <label htmlFor="postTitle">Post Title:</label>
+    <input
+      type="text"
+      id="postTitle"
+      name="postTitle"
+      formControlName="postTitle"
+    />
+    <label htmlFor="postAuthor">Author:</label>
+    <select id="postAuthor" name="postAuthor" formControlName="postAuthor">
+      <option value=""></option>
+    </select>
+    <label htmlFor="postContent">Content:</label>
+    <textarea
+      id="postContent"
+      name="postContent"
+      formControlName="postContent"
+    ></textarea>
+    <button type="submit" [disabled]="postForm.invalid">Save Post</button>
+  </form>
+</section>
