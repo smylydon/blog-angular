@@ -15,6 +15,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { UserEffects } from './+state/user/user.effects';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     FeaturesRoutingModule,
     StoreModule.forFeature(fromPosts.POST_FEATURE_KEY, fromPosts.reducer),
     StoreModule.forFeature(fromUsers.USER_FEATURE_KEY, fromUsers.reducer),
-    EffectsModule.forFeature([PostEffects]),
+    EffectsModule.forFeature([PostEffects, UserEffects]),
   ],
   declarations: [
     PostListComponent,

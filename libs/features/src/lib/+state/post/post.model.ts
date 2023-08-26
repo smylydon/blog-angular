@@ -15,3 +15,9 @@ export interface PostEntity {
     coffee: number;
   };
 }
+
+export interface NewPost {
+  title: string;
+  userId: string;
+  body: string;
+}

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'lib-edit-post',
   templateUrl: './edit-post.component.html',
   styleUrls: ['./edit-post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPostComponent {}

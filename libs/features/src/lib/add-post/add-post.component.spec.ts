@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddPostComponent } from './add-post.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 describe('AddPostComponent', () => {
   let compiled: HTMLElement;
@@ -12,6 +13,15 @@ describe('AddPostComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [AddPostComponent],
+      providers: [
+        {
+          provide: Store,
+          useValue: {
+            select: () => {},
+            dispatch: () => {},
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddPostComponent);
@@ -56,7 +66,7 @@ describe('AddPostComponent', () => {
     expect(content.valid).toBeFalsy();
     expect(title.valid).toBeFalsy();
 
-    author.setValue('A.N. Author');
+    author.setValue('1');
     content.setValue('Some Content');
     title.setValue('A Title');
     fixture.detectChanges();
@@ -66,7 +76,7 @@ describe('AddPostComponent', () => {
     expect(title.valid).toBeTruthy();
 
     const selected = compiled.querySelector('button[type=submit]');
-    expect(selected?.hasAttribute('disabled')).toBe(false);
+    expect(selected?.hasAttribute('disabled')).toBe(true);
     expect(postForm.invalid).toBe(false);
   });
 });

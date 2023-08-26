@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   public getUsers(): Observable<UserEntity[]> {
-    return this.http.get<UserEntity[]>('posts').pipe(
+    return this.http.get<UserEntity[]>('users').pipe(
       map((response) => {
         return response as UserEntity[];
       })
