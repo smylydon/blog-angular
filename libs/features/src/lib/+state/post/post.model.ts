@@ -2,7 +2,7 @@
  * Interface for the 'Post' data
  */
 export interface PostEntity {
-  id: string;
+  id: number;
   title: string;
   content: string;
   date?: string;

@@ -2,16 +2,25 @@
  * Interface for the 'User' data
  */
 export interface UserEntity {
-  id: string;
-  title: string;
-  content: string;
-  date?: string;
-  userId: string;
-  reactions?: {
-    thumbsUp: number;
-    wow: number;
-    heart: number;
-    rocket: number;
-    coffee: number;
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
   };
 }

@@ -7,7 +7,7 @@ import { PostActions } from './post.actions';
 
 @Injectable()
 export class PostEffects {
-  loadFeaturess$ = createEffect(() => {
+  loadPosts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PostActions.intializePosts),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */

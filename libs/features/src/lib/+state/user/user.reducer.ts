@@ -32,7 +32,11 @@ export const reducer = createReducer(
   })),
   on(UserActions.loadUsersSuccess, (state, { users }) => {
     return usersAdapter.setAll(users, { ...state, loaded: true });
-  })
+  }),
+  on(UserActions.loadUsersFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
 
 export function userReducer(state: UserState | undefined, action: Action) {
