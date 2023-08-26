@@ -2,18 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { FeaturesEffects } from './features.effects';
+import { PostEffects } from './post.effects';
 
-describe('FeaturesEffects', () => {
+describe('PostEffects', () => {
   let actions$: Observable<any>;
-  let effects: FeaturesEffects;
+  let effects: PostEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FeaturesEffects, provideMockActions(() => actions$)],
+      providers: [PostEffects, provideMockActions(() => actions$)],
     });
 
-    effects = TestBed.inject(FeaturesEffects);
+    effects = TestBed.inject(PostEffects);
   });
 
   it('should be created', () => {

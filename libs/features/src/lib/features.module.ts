@@ -7,20 +7,17 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromFeatures from './+state/features.reducer';
+import * as fromPosts from './+state/post/post.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { FeaturesEffects } from './+state/features.effects';
+import { PostEffects } from './+state/post/post.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FeaturesRoutingModule,
-    StoreModule.forFeature(
-      fromFeatures.featuresFeatureKey,
-      fromFeatures.reducer
-    ),
-    EffectsModule.forFeature([FeaturesEffects]),
+    StoreModule.forFeature(fromPosts.POST_FEATURE_KEY, fromPosts.reducer),
+    EffectsModule.forFeature([PostEffects]),
   ],
   declarations: [
     PostListComponent,
