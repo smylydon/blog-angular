@@ -1,6 +1,7 @@
 /**
  * Interface for the 'Post' data
  */
+/*
 export interface PostEntity {
   id: number;
   title: string;
@@ -15,9 +16,17 @@ export interface PostEntity {
     coffee: number;
   };
 }
-
+*/
 export interface NewPost {
   title: string;
   userId: string;
   body: string;
+}
+
+export interface PostEntity extends NewPost {
+  id: string;
+}
+
+export interface Post extends PostEntity {
+  name?: string;
 }

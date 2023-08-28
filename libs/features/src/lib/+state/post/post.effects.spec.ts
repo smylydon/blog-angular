@@ -3,6 +3,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { PostEffects } from './post.effects';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ApiService } from '../../services/api.service';
 
 describe('PostEffects', () => {
   let actions$: Observable<any>;
@@ -10,7 +12,12 @@ describe('PostEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostEffects, provideMockActions(() => actions$)],
+      providers: [
+        { provide: ApiService, useValue: {} },
+        HttpClientTestingModule,
+        PostEffects,
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(PostEffects);

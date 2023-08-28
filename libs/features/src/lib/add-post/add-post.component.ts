@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { UserState } from '../+state/user/user.reducer';
 import { Observable } from 'rxjs';
+
+import { UserState } from '../+state/user/user.reducer';
 import { PostActions } from '../+state/post/post.actions';
 import { NewPost } from '../+state/post/post.model';
 
@@ -22,8 +23,8 @@ import { UserActions } from '../+state/user/user.actions';
   styleUrls: ['./add-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddPostComponent {
-  public users$: Observable<UserEntity[]>;
+export class AddPostComponent implements OnInit {
+  public users$: Observable<UserEntity[]> = this.store.select(getAllUsers);
   public postForm!: FormGroup; // eslint-disable-line
   private postTitle: FormControl = new FormControl('', [
     Validators.required,
@@ -38,9 +39,7 @@ export class AddPostComponent {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<UserState>
-  ) {
-    this.users$ = this.store.select(getAllUsers);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({

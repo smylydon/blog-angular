@@ -1,1 +1,15 @@
-<p>post-list works!</p>
+<article *ngFor="let post of output$ | async; trackBy: trackBy">
+  <h2>{{ post.title }}</h2>
+  <p class="excerpt">{{ post.body }}...</p>
+  <p class="postCredit">
+    <a [routerLink]="['/post', post.id]">View Post</a>
+
+    <span>{{ post.name }}</span>
+
+    <!--
+      <TimeAgo timestamp={post.date} /> --->
+  </p>
+  <!-- 
+    <ReactionButtons post={post} />
+    -->
+</article>
