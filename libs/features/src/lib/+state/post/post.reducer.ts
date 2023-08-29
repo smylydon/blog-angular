@@ -30,6 +30,11 @@ export const reducer = createReducer(
     loaded: false,
     error: null,
   })),
+  on(PostActions.loadPosts, (state) => ({
+    ...state,
+    loaded: true,
+    error: null,
+  })),
   on(PostActions.loadPostsSuccess, (state, { posts }) => {
     return postsAdapter.setAll(posts, { ...state, loaded: true });
   })

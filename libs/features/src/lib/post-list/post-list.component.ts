@@ -42,8 +42,8 @@ export class PostListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(PostActions.intializePosts());
-    this.store.dispatch(UserActions.intializeUsers());
+    this.store.dispatch(PostActions.loadPosts());
+    this.store.dispatch(UserActions.loadUsers());
   }
 
   public trackBy(index: number, post: PostEntity) {

@@ -4,7 +4,8 @@ import { NewPost, PostEntity } from './post.model';
 export const PostActions = createActionGroup({
   source: 'Post',
   events: {
-    'Intialize posts': emptyProps(),
+    'Intialize Posts': emptyProps(),
+    'Load Posts': emptyProps(),
     'Load Posts Success': props<{ posts: PostEntity[] }>(),
     'Load Posts Failure': props<{ error: Error }>(),
     'Save Post': props<{ post: NewPost }>(),

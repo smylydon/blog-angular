@@ -47,7 +47,8 @@ export class AddPostComponent implements OnInit {
       postAuthor: this.postAuthor,
       postContent: this.postContent,
     });
-    this.store.dispatch(UserActions.intializeUsers());
+    this.store.dispatch(PostActions.loadPosts());
+    this.store.dispatch(UserActions.loadUsers());
   }
 
   submit() {

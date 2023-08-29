@@ -30,6 +30,11 @@ export const reducer = createReducer(
     loaded: false,
     error: null,
   })),
+  on(UserActions.loadUsers, (state) => ({
+    ...state,
+    loaded: true,
+    error: null,
+  })),
   on(UserActions.loadUsersSuccess, (state, { users }) => {
     return usersAdapter.setAll(users, { ...state, loaded: true });
   }),

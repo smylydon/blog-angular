@@ -11,15 +11,15 @@ const featuresRoutes: Routes = [
     component: PostListComponent,
   },
   {
-    path: 'add',
-    component: AddPostComponent,
-  },
-  {
-    path: 'edit',
+    path: 'edit/:id',
     component: EditPostComponent,
   },
   {
     path: 'post',
+    component: AddPostComponent,
+  },
+  {
+    path: 'post/:id',
     component: SinglePostComponent,
   },
 ];

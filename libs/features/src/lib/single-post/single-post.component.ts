@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-single-post',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./single-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SinglePostComponent {}
+export class SinglePostComponent {
+  constructor(private store: Store) {}
+}
