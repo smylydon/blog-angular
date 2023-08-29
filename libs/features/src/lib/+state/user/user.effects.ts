@@ -13,7 +13,6 @@ export class UserEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.intializeUsers),
-      /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() =>
         this.apiService.getUsers().pipe(
           map((data: UserEntity[]) => {

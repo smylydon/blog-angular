@@ -13,7 +13,6 @@ export class PostEffects {
   loadPosts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PostActions.intializePosts),
-      /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() =>
         this.apiService.getPosts().pipe(
           map((data: PostEntity[]) => {

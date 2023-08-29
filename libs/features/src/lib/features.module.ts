@@ -17,6 +17,7 @@ import { SinglePostComponent } from './single-post/single-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { UserEffects } from './+state/user/user.effects';
 import { AuthorPipe } from './pipes/author.pipe';
+import { ReactionButtonsComponent } from './reaction-buttons/reaction-buttons.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { AuthorPipe } from './pipes/author.pipe';
     SinglePostComponent,
     EditPostComponent,
     AuthorPipe,
+    ReactionButtonsComponent,
   ],
 })
 export class FeaturesModule {}
