@@ -16,7 +16,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
-import { AuthorPipe } from './pipes/author.pipe';
+import { ReactionButtonCountPipe } from './pipes/reaction-button-count.pipe';
 import { ReactionButtonsComponent } from './reaction-buttons/reaction-buttons.component';
 
 import { PostActions } from './+state/post/post.actions';
@@ -37,7 +37,7 @@ import { UserActions } from './+state/user/user.actions';
     AddPostComponent,
     SinglePostComponent,
     EditPostComponent,
-    AuthorPipe,
+    ReactionButtonCountPipe,
     ReactionButtonsComponent,
   ],
 })

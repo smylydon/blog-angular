@@ -1,0 +1,18 @@
+.post-credit {
+  font-size: 1rem;
+}
+
+.post-credit a,
+.post-credit a:visited {
+  margin-right: 0.5rem;
+  color: black;
+}
+
+.post-credit a:hover,
+.post-credit a:focus {
+  color: hsla(0, 0%, 0%, 0.75);
+}
+
+.excerpt {
+  font-style: italic;
+}

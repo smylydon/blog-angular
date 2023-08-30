@@ -1,21 +1,20 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { PostActions } from './post.actions';
-import { PostEntity } from './post.model';
+import { Post } from './post.model';
 
 export const POST_FEATURE_KEY = 'posts';
 
-export interface PostState extends EntityState<PostEntity> {
+export interface PostState extends EntityState<Post> {
   selectedId?: string | number; // which Labels record has been selected
   status: string; //'idle' | 'loading' | 'succeeded' | 'failed'
   loaded: boolean;
   error?: Error | null; // last known error (if any)
 }
 
-export const postsAdapter: EntityAdapter<PostEntity> =
-  createEntityAdapter<PostEntity>({
-    selectId: (model: PostEntity) => model.id,
-  });
+export const postsAdapter: EntityAdapter<Post> = createEntityAdapter<Post>({
+  selectId: (model: Post) => model.id,
+});
 
 export const initialPostsState: PostState = postsAdapter.getInitialState({
   // set initial required properties
@@ -37,6 +36,10 @@ export const reducer = createReducer(
   })),
   on(PostActions.loadPostsSuccess, (state, { posts }) => {
     return postsAdapter.setAll(posts, { ...state, loaded: true });
+  }),
+  on(PostActions.updatePost, (state, { update }) => {
+    console.log('updated::::', update);
+    return postsAdapter.updateOne(update, state);
   })
 );
 

@@ -29,4 +29,13 @@ export interface PostEntity extends NewPost {
 
 export interface Post extends PostEntity {
   name?: string;
+  reactions: {
+    thumbsUp: number;
+    wow: number;
+    heart: number;
+    rocket: number;
+    coffee: number;
+  };
 }
+export type Reactions = 'thumbsUp' | 'wow' | 'heart' | 'rocket' | 'coffee';
+export type UpdateObject = { post: Post; value: Reactions };
