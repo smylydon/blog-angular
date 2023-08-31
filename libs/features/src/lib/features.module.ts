@@ -11,7 +11,7 @@ import * as fromUsers from './+state/user/user.reducer';
 import { PostEffects } from './+state/post/post.effects';
 import { UserEffects } from './+state/user/user.effects';
 
-import { FeaturesRoutingModule } from './lib.routes';
+import { FeaturesRoutingModule } from './features.routes';
 import { PostListComponent } from './post-list/post-list.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SinglePostComponent } from './single-post/single-post.component';

@@ -29,13 +29,13 @@ export const getUserEntities = createSelector(
   (state: UserState) => selectEntities(state)
 );
 
-export const getSelectedPostId = createSelector(
+export const getSelectedUserId = createSelector(
   selectFeaturesState,
   (state: UserState) => state.selectedId
 );
 
-export const getSelectedPost = createSelector(
+export const getSelectedUser = createSelector(
   selectFeaturesState,
-  getSelectedPostId,
+  getSelectedUserId,
   (entities, selectedId) => (selectedId ? selectedId in entities : undefined)
 );

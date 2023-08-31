@@ -1,1 +1,32 @@
-<p>edit-post works!</p>
+<section>
+  <h2>Edit Post</h2>
+  <form [formGroup]="editForm" (ngSubmit)="submit()">
+    <label htmlFor="postTitle">Post Title:</label>
+    <input
+      type="text"
+      id="postTitle"
+      name="postTitle"
+      formControlName="postTitle"
+    />
+    <label htmlFor="postAuthor">Author:</label>
+    <select id="postAuthor" name="postAuthor" formControlName="postAuthor">
+      <option value=""></option>
+      <option
+        *ngFor="let user of users$ | async; trackBy: trackBy"
+        [value]="user.id"
+      >
+        {{ user.name }}
+      </option>
+    </select>
+    <label htmlFor="postContent">Content:</label>
+    <textarea
+      id="postContent"
+      name="postContent"
+      formControlName="postContent"
+    ></textarea>
+    <button type="button" type="submit" [disabled]="editForm.invalid">
+      Save Post
+    </button>
+    <button class="deleteButton" type="button">Delete Post</button>
+  </form>
+</section>

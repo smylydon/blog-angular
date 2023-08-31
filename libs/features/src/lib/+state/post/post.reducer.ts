@@ -38,7 +38,6 @@ export const reducer = createReducer(
     return postsAdapter.setAll(posts, { ...state, loaded: true });
   }),
   on(PostActions.updatePost, (state, { update }) => {
-    console.log('updated::::', update);
     return postsAdapter.updateOne(update, state);
   })
 );

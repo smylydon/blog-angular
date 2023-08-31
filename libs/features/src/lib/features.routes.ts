@@ -4,6 +4,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { SinglePostComponent } from './single-post/single-post.component';
+import { singlePostResolver } from './resolvers/single-post.resolver';
 
 const featuresRoutes: Routes = [
   {
@@ -21,6 +22,9 @@ const featuresRoutes: Routes = [
   {
     path: 'post/:id',
     component: SinglePostComponent,
+    resolve: {
+      routeResolver: singlePostResolver,
+    },
   },
 ];
 
