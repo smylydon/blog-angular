@@ -21,6 +21,8 @@ import { ReactionButtonsComponent } from './reaction-buttons/reaction-buttons.co
 
 import { PostActions } from './+state/post/post.actions';
 import { UserActions } from './+state/user/user.actions';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { TimeAgoComponent } from './time-ago/time-ago.component';
 
 @NgModule({
   imports: [
@@ -39,6 +41,8 @@ import { UserActions } from './+state/user/user.actions';
     EditPostComponent,
     ReactionButtonCountPipe,
     ReactionButtonsComponent,
+    TimeAgoPipe,
+    TimeAgoComponent,
   ],
 })
 export class FeaturesModule {

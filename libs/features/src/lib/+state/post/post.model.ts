@@ -29,6 +29,7 @@ export interface PostEntity extends NewPost {
 
 export interface Post extends PostEntity {
   name?: string;
+  date: string;
   reactions: {
     thumbsUp: number;
     wow: number;

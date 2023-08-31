@@ -20,6 +20,7 @@ export class ReactionButtonsComponent {
     title: '',
     userId: '',
     body: '',
+    date: '',
     reactions: {
       thumbsUp: 0,
       wow: 0,

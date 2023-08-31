@@ -20,6 +20,7 @@ export class PostEffects {
               (post: PostEntity) => {
                 return <Post>{
                   ...post,
+                  date: new Date().toISOString(),
                   reactions: {
                     thumbsUp: 0,
                     wow: 0,

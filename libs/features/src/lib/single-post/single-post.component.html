@@ -6,8 +6,7 @@
 
     <span>{{ post.name }}</span>
 
-    <!--
-      <TimeAgo timestamp={post.date} /> --->
+    <lib-time-ago [timestamp]="post.date" />
   </p>
   <lib-reaction-buttons
     [post]="post"
