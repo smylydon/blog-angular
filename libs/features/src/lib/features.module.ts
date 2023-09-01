@@ -19,10 +19,9 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { ReactionButtonCountPipe } from './pipes/reaction-button-count.pipe';
 import { ReactionButtonsComponent } from './reaction-buttons/reaction-buttons.component';
 
-import { PostActions } from './+state/post/post.actions';
-import { UserActions } from './+state/user/user.actions';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { TimeAgoComponent } from './time-ago/time-ago.component';
+import { FeaturesFacadeService } from './+state/features-facade.service';
 
 @NgModule({
   imports: [
@@ -46,12 +45,9 @@ import { TimeAgoComponent } from './time-ago/time-ago.component';
   ],
 })
 export class FeaturesModule {
-  constructor(private store: Store) {
+  constructor(private facade: FeaturesFacadeService) {
     // initialize store here
     // so if browser is refreshed are automatically retrieved from the backend.
     // NB look into using metareducer and localstorage.....
-
-    this.store.dispatch(PostActions.intializePosts());
-    this.store.dispatch(UserActions.intializeUsers());
   }
 }

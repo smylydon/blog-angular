@@ -1,4 +1,4 @@
-<article *ngFor="let post of output$ | async; trackBy: trackBy">
+<article *ngFor="let post of posts$ | async; trackBy: trackBy">
   <h2>{{ post.title }}</h2>
   <p class="excerpt">{{ post.body }}...</p>
   <p class="post-credit">
