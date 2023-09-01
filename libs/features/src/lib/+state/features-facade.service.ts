@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
 
-import { Observable, combineLatest } from 'rxjs';
-import { concatMap, filter, map } from 'rxjs/operators';
+import { Observable, combineLatest, merge } from 'rxjs';
+import { concatMap, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 import { getAllPosts, getPostsLoaded, Post, PostActions } from './index';
 import { UserActions, UserEntity } from './index';
@@ -60,6 +61,26 @@ export class FeaturesFacadeService {
       concatMap(() => {
         return posts;
       })
+    );
+  }
+
+  postFromRouteOrId(
+    activedRoute: ActivatedRoute
+  ): Observable<Post | undefined> {
+    const postId = activedRoute.snapshot.params['id'];
+    const routedPost$ = activedRoute.data.pipe(
+      map((data: Data) => {
+        let post: Post | undefined = undefined;
+
+        if (data && data['routeResolver']) {
+          post = <Post>data['routeResolver'];
+        }
+        return post;
+      })
+    );
+
+    return merge(routedPost$, this.currentPostById(postId)).pipe(
+      distinctUntilChanged()
     );
   }
 

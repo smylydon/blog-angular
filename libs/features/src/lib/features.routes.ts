@@ -14,6 +14,9 @@ const featuresRoutes: Routes = [
   {
     path: 'edit/:id',
     component: EditPostComponent,
+    resolve: {
+      routeResolver: singlePostResolver,
+    },
   },
   {
     path: 'post',

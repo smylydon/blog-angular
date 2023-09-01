@@ -4,12 +4,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription, merge } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs';
 
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { PostActions } from '../+state/post/post.actions';
-import { ActivatedRoute, Data } from '@angular/router';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
 
 @Component({
@@ -29,32 +29,10 @@ export class SinglePostComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const postId = this.activedRoute.snapshot.params['id'];
-    const routedPost$ = this.activedRoute.data.pipe(
-      map((data: Data) => {
-        const post = undefined;
-
-        if (data && data['routeResolver']) {
-          this.post = data['routeResolver'];
-        }
-        return post;
-      })
-    );
-
-    const postSubject: Subject<Post | undefined> = new BehaviorSubject<
-      Post | undefined
-    >(undefined);
-
     this.subscription.add(
-      postSubject
-        .asObservable()
+      this.facade
+        .postFromRouteOrId(this.activedRoute)
         .subscribe((post: Post | undefined) => (this.post = post))
-    );
-
-    this.subscription.add(
-      merge(routedPost$, this.facade.currentPostById(postId)).subscribe(
-        postSubject
-      )
     );
   }
 
