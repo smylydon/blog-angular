@@ -27,6 +27,8 @@
     <button type="button" type="submit" [disabled]="editForm.invalid">
       Save Post
     </button>
-    <button class="deleteButton" type="button">Delete Post</button>
+    <button class="delete-button" type="button" [disabled]="editForm.invalid">
+      Delete Post
+    </button>
   </form>
 </section>

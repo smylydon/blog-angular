@@ -1,21 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
-import { UserState } from '../+state/user/user.reducer';
-import { PostActions } from '../+state/post/post.actions';
-import { NewPost } from '../+state/post/post.model';
+import { NewPost, Post } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
-import { getAllUsers } from '../+state/user/user.selectors';
-import { UserActions } from '../+state/user/user.actions';
+import { FeaturesFacadeService } from '../+state/features-facade.service';
 
 @Component({
   selector: 'lib-edit-post',
@@ -23,8 +26,8 @@ import { UserActions } from '../+state/user/user.actions';
   styleUrls: ['./edit-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditPostComponent {
-  public users$: Observable<UserEntity[]> = this.store.select(getAllUsers);
+export class EditPostComponent implements OnInit, OnDestroy {
+  public users$: Observable<UserEntity[]> = this.facade.justUsers$;
   public editForm!: FormGroup; // eslint-disable-line
   private postTitle: FormControl = new FormControl('', [
     Validators.required,
@@ -35,10 +38,12 @@ export class EditPostComponent {
     Validators.required,
     Validators.minLength(10),
   ]);
+  private subscription: Subscription = new Subscription();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<UserState>
+    private activedRoute: ActivatedRoute,
+    private facade: FeaturesFacadeService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +52,25 @@ export class EditPostComponent {
       postAuthor: this.postAuthor,
       postContent: this.postContent,
     });
-    this.store.dispatch(PostActions.loadPosts());
-    this.store.dispatch(UserActions.loadUsers());
+
+    this.subscription.add(
+      this.facade
+        .postFromRouteOrId(this.activedRoute)
+        .pipe(
+          filter((post: Post | undefined) => {
+            return post !== undefined;
+          })
+        )
+        .subscribe((post: Post | undefined) => {
+          this.postAuthor.setValue(post?.userId);
+          this.postContent.setValue(post?.body);
+          this.postTitle.setValue(post?.title);
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   submit() {

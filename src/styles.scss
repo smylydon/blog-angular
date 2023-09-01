@@ -100,3 +100,16 @@ form {
 textarea {
   height: 200px;
 }
+
+.delete-button {
+  background-color: palevioletred;
+  color: white;
+}
+
+button[type='submit'],
+.delete-button {
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
