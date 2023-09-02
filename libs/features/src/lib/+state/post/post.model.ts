@@ -19,12 +19,12 @@ export interface PostEntity {
 */
 export interface NewPost {
   title: string;
-  userId: string;
+  userId: number;
   body: string;
 }
 
 export interface PostEntity extends NewPost {
-  id: string;
+  id: number;
 }
 
 export interface Post extends PostEntity {

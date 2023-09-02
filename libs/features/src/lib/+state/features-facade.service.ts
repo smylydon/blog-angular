@@ -12,11 +12,14 @@ import { getAllUsers, getUsersLoaded } from './user/user.selectors';
 
 @Injectable()
 export class FeaturesFacadeService {
-  public justPosts$: Observable<Post[]> = this.store.select(getAllPosts);
-  public justUsers$: Observable<UserEntity[]> = this.store.select(getAllUsers);
+  public justPosts$: Observable<Post[]>;
+  public justUsers$: Observable<UserEntity[]>;
   public posts$: Observable<Post[]>;
 
   constructor(private store: Store) {
+    this.justPosts$ = this.store.select(getAllPosts);
+    this.justUsers$ = this.store.select(getAllUsers);
+
     this.posts$ = combineLatest([this.justPosts$, this.justUsers$]).pipe(
       map(([posts, users]: [Post[], UserEntity[]]) => {
         return <Post[]>posts.map((post: Post) => {
@@ -32,16 +35,12 @@ export class FeaturesFacadeService {
       })
     );
 
-    this.initialize();
-  }
-
-  initialize() {
     this.store.dispatch(PostActions.intializePosts());
     this.store.dispatch(UserActions.intializeUsers());
   }
 
   currentPostById(id: string): Observable<Post | undefined> {
-    const posts = this.store.select(getAllPosts).pipe(
+    const posts = this.justPosts$.pipe(
       map((posts: Post[]) => {
         const postId = Number(id);
         if (Array.isArray(posts) && posts.length > 0) {

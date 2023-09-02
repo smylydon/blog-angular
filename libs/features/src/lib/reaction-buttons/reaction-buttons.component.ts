@@ -16,9 +16,9 @@ import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 })
 export class ReactionButtonsComponent {
   @Input() post: Post = {
-    id: '',
+    id: 0,
     title: '',
-    userId: '',
+    userId: 0,
     body: '',
     date: '',
     reactions: {
