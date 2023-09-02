@@ -1,4 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+
+import { FeaturesFacadeService } from '../+state/features-facade.service';
 import { EditPostComponent } from './edit-post.component';
 
 describe('EditPostComponent', () => {
@@ -7,7 +13,23 @@ describe('EditPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
       declarations: [EditPostComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 123 }),
+          },
+        },
+        {
+          provide: FeaturesFacadeService,
+          useValue: {
+            postFromRouteOrId: () => of(undefined),
+            justUsers$: of([]),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditPostComponent);

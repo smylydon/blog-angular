@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TimeAgoComponent } from './time-ago.component';
+import { TimeAgoPipe } from '../pipes/time-ago.pipe';
 
 describe('TimeAgoComponent', () => {
   let component: TimeAgoComponent;
@@ -7,7 +8,8 @@ describe('TimeAgoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TimeAgoComponent],
+      declarations: [TimeAgoComponent, TimeAgoPipe],
+      providers: [TimeAgoPipe],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TimeAgoComponent);

@@ -22,6 +22,7 @@ import { ReactionButtonsComponent } from './reaction-buttons/reaction-buttons.co
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { TimeAgoComponent } from './time-ago/time-ago.component';
 import { FeaturesFacadeService } from './+state/features-facade.service';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   imports: [
@@ -42,6 +43,12 @@ import { FeaturesFacadeService } from './+state/features-facade.service';
     ReactionButtonsComponent,
     TimeAgoPipe,
     TimeAgoComponent,
+  ],
+  providers: [
+    ApiService,
+    FeaturesFacadeService,
+    ReactionButtonCountPipe,
+    TimeAgoPipe,
   ],
 })
 export class FeaturesModule {

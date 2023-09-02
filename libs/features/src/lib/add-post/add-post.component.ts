@@ -5,17 +5,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { UserState } from '../+state/user/user.reducer';
-import { PostActions } from '../+state/post/post.actions';
 import { NewPost } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
-import { getAllUsers } from '../+state/user/user.selectors';
-import { UserActions } from '../+state/user/user.actions';
+import { FeaturesFacadeService } from '../+state/features-facade.service';
 
 @Component({
   selector: 'lib-add-post',
@@ -24,7 +20,7 @@ import { UserActions } from '../+state/user/user.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPostComponent implements OnInit {
-  public users$: Observable<UserEntity[]> = this.store.select(getAllUsers);
+  public users$: Observable<UserEntity[]> = this.facade.justUsers$;
   public postForm!: FormGroup; // eslint-disable-line
   private postTitle: FormControl = new FormControl('', [
     Validators.required,
@@ -38,7 +34,7 @@ export class AddPostComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<UserState>
+    private facade: FeaturesFacadeService
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +43,6 @@ export class AddPostComponent implements OnInit {
       postAuthor: this.postAuthor,
       postContent: this.postContent,
     });
-    this.store.dispatch(PostActions.loadPosts());
-    this.store.dispatch(UserActions.loadUsers());
   }
 
   submit() {
@@ -58,7 +52,7 @@ export class AddPostComponent implements OnInit {
       userId: post.postAuthor,
       body: post.postContent,
     };
-    // this.store.dispatch(PostActions.savePost({ post: newPost }));
+    // this.facade.dispatch(PostActions.savePost({ post: newPost }));
   }
 
   trackBy(index: number, user: UserEntity) {

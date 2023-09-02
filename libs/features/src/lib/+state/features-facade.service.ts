@@ -10,9 +10,7 @@ import { UserActions, UserEntity } from './index';
 
 import { getAllUsers, getUsersLoaded } from './user/user.selectors';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FeaturesFacadeService {
   public justPosts$: Observable<Post[]> = this.store.select(getAllPosts);
   public justUsers$: Observable<UserEntity[]> = this.store.select(getAllUsers);

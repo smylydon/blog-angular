@@ -6,9 +6,7 @@ import { map } from 'rxjs/operators';
 import { PostEntity } from '../+state/post/post.model';
 import { UserEntity } from '../+state/user/user.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiService {
   constructor(private http: HttpClient) {}
 

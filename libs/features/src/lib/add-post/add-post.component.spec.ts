@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddPostComponent } from './add-post.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+
+import { FeaturesFacadeService } from '../+state/features-facade.service';
+import { UserEntity } from '../+state/user/user.model';
 
 describe('AddPostComponent', () => {
   let compiled: HTMLElement;
@@ -15,10 +18,10 @@ describe('AddPostComponent', () => {
       declarations: [AddPostComponent],
       providers: [
         {
-          provide: Store,
+          provide: FeaturesFacadeService,
           useValue: {
-            select: () => {},
-            dispatch: () => {},
+            postFromRouteOrId: () => of(undefined),
+            justUsers$: of([]),
           },
         },
       ],

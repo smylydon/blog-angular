@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
+
+import { of } from 'rxjs';
+
+import { FeaturesFacadeService } from '../+state/features-facade.service';
 import { PostListComponent } from './post-list.component';
 
 describe('PostListComponent', () => {
@@ -11,10 +14,9 @@ describe('PostListComponent', () => {
       declarations: [PostListComponent],
       providers: [
         {
-          provide: Store,
+          provide: FeaturesFacadeService,
           useValue: {
-            select: () => {},
-            dispatch: () => {},
+            posts$: of([]),
           },
         },
       ],

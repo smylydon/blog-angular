@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+
+import { of } from 'rxjs';
+
+import { FeaturesFacadeService } from '../+state/features-facade.service';
 import { SinglePostComponent } from './single-post.component';
 
 describe('SinglePostComponent', () => {
@@ -8,6 +13,20 @@ describe('SinglePostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SinglePostComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 123 }),
+          },
+        },
+        {
+          provide: FeaturesFacadeService,
+          useValue: {
+            postFromRouteOrId: () => of(undefined),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SinglePostComponent);
