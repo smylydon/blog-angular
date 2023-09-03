@@ -1,10 +1,11 @@
+import { ChangeDetectionStrategy } from '@angular/core';
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddPostComponent } from './add-post.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { FeaturesFacadeService } from '../+state/features-facade.service';
-import { UserEntity } from '../+state/user/user.model';
 
 describe('AddPostComponent', () => {
   let compiled: HTMLElement;
@@ -25,7 +26,11 @@ describe('AddPostComponent', () => {
           },
         },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(AddPostComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddPostComponent);
     component = fixture.componentInstance;
@@ -79,7 +84,7 @@ describe('AddPostComponent', () => {
     expect(title.valid).toBeTruthy();
 
     const selected = compiled.querySelector('button[type=submit]');
-    expect(selected?.hasAttribute('disabled')).toBe(true);
+    expect(selected?.hasAttribute('disabled')).toBe(false);
     expect(postForm.invalid).toBe(false);
   });
 });
