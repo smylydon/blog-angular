@@ -11,11 +11,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Update } from '@ngrx/entity';
 
 import { Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { NewPost, Post } from '../+state/post/post.model';
+import { PostActions } from '../+state';
+import { Post } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
@@ -29,6 +31,7 @@ import { FeaturesFacadeService } from '../+state/features-facade.service';
 export class EditPostComponent implements OnInit, OnDestroy {
   public users$: Observable<UserEntity[]> = this.facade.justUsers$;
   public editForm!: FormGroup; // eslint-disable-line
+  private postId: FormControl = new FormControl(0, [Validators.required]);
   private postTitle: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(3),
@@ -48,6 +51,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.editForm = this.formBuilder.group({
+      postId: this.postId,
       postTitle: this.postTitle,
       postAuthor: this.postAuthor,
       postContent: this.postContent,
@@ -62,6 +66,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe((post: Post | undefined) => {
+          this.postId.setValue(post?.id);
           this.postAuthor.setValue(post?.userId);
           this.postContent.setValue(post?.body);
           this.postTitle.setValue(post?.title);
@@ -73,14 +78,24 @@ export class EditPostComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  deletePost(event: Event) {
+    event.stopImmediatePropagation();
+    const post = this.editForm.value;
+    const post_id = Number(post.postId);
+    this.facade.dispatch(PostActions.deletePost({ post_id }));
+  }
+
   submit() {
     const post = this.editForm.value;
-    const newPost: NewPost = {
-      title: post.postTitle,
-      userId: post.postAuthor,
-      body: post.postContent,
+    const updatedPost: Update<Post> = <Update<Post>>{
+      id: Number(post.postId),
+      changes: {
+        title: post.postTitle,
+        userId: post.postAuthor,
+        body: post.postContent,
+      },
     };
-    // this.store.dispatch(PostActions.savePost({ post: newPost }));
+    this.facade.dispatch(PostActions.updatePost({ update: updatedPost }));
   }
 
   trackBy(index: number, user: UserEntity) {

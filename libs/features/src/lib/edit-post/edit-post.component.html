@@ -27,8 +27,14 @@
     <button type="button" type="submit" [disabled]="editForm.invalid">
       Save Post
     </button>
-    <button class="delete-button" type="button" [disabled]="editForm.invalid">
+    <button
+      class="delete-button"
+      type="button"
+      [disabled]="editForm.invalid"
+      (click)="deletePost($event)"
+    >
       Delete Post
     </button>
+    <input type="hidden" id="postId" name="postId" formControlName="postId" />
   </form>
 </section>

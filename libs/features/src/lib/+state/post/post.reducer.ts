@@ -37,9 +37,47 @@ export const reducer = createReducer(
   on(PostActions.loadPostsSuccess, (state, { posts }) => {
     return postsAdapter.setAll(posts, { ...state, loaded: true });
   }),
-  on(PostActions.updatePost, (state, { update }) => {
+  on(PostActions.loadPostsFailure, (state, { error }) => ({
+    ...state,
+    loaded: true,
+    error,
+  })),
+  on(PostActions.loadPostsFailure, (state, { error }) => ({
+    ...state,
+    loaded: true,
+    error,
+  })),
+
+  on(PostActions.savePostSuccess, (state, { post }) => {
+    return postsAdapter.addOne(post, { ...state, loaded: true, error: null });
+  }),
+  on(PostActions.savePostFailure, (state, { error }) => ({
+    ...state,
+    loaded: true,
+    error,
+  })),
+
+  on(PostActions.updatePostSuccess, (state, { update }) => {
     return postsAdapter.updateOne(update, state);
-  })
+  }),
+  on(PostActions.updatePostFailure, (state, { error }) => ({
+    ...state,
+    loaded: true,
+    error,
+  })),
+
+  on(PostActions.deletePostSuccess, (state, { post_id }) => {
+    return postsAdapter.removeOne(post_id, {
+      ...state,
+      loaded: true,
+      error: null,
+    });
+  }),
+  on(PostActions.deletePostFailure, (state, { error }) => ({
+    ...state,
+    loaded: true,
+    error,
+  }))
 );
 
 export function postReducer(state: PostState | undefined, action: Action) {

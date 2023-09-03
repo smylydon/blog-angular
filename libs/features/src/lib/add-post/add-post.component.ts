@@ -8,6 +8,7 @@ import {
 
 import { Observable } from 'rxjs';
 
+import { PostActions } from '../+state';
 import { NewPost } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
@@ -52,7 +53,7 @@ export class AddPostComponent implements OnInit {
       userId: post.postAuthor,
       body: post.postContent,
     };
-    // this.facade.dispatch(PostActions.savePost({ post: newPost }));
+    this.facade.dispatch(PostActions.savePost({ post: newPost }));
   }
 
   trackBy(index: number, user: UserEntity) {
