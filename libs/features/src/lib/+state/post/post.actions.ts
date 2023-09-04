@@ -5,7 +5,7 @@ import { Update } from '@ngrx/entity';
 export const PostActions = createActionGroup({
   source: 'Post',
   events: {
-    'Intialize Posts': emptyProps(),
+    'Get Posts': emptyProps(),
     'Load Posts': emptyProps(),
     'Load Posts Success': props<{ posts: Post[] }>(),
     'Load Posts Failure': props<{ error: Error }>(),

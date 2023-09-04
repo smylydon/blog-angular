@@ -1,9 +1,9 @@
 import * as fromFeatures from './user.reducer';
-import { selectFeaturesState } from './user.selectors';
+import { selectFeaturesUsersState } from './user.selectors';
 
 describe('User Selectors', () => {
   it('should select the post state', () => {
-    const result = selectFeaturesState({
+    const result = selectFeaturesUsersState({
       [fromFeatures.USER_FEATURE_KEY]: {},
     });
 

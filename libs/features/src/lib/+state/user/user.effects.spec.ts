@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 import { UserEffects } from './user.effects';
 import { UserActions } from './user.actions';
 import { ApiService } from '../../services/api.service';
-import { users as UsersArray } from '../../mocks/mocks';
+import { users as UsersArray } from '../../mocks';
 
 describe('UserEffects', () => {
   let actions$: ReplaySubject<Action>;
@@ -48,7 +48,7 @@ describe('UserEffects', () => {
     });
 
     it('should get users', async () => {
-      actions$.next(UserActions.intializeUsers());
+      actions$.next(UserActions.loadUsers());
 
       const result = await new Promise((resolve) =>
         effects.loadUsers$.pipe(take(1)).subscribe(resolve)
@@ -95,7 +95,7 @@ describe('UserEffects', () => {
     });
 
     it('should throwError on get users', async () => {
-      actions$.next(UserActions.intializeUsers());
+      actions$.next(UserActions.loadUsers());
 
       const result = await new Promise((resolve) =>
         effects.loadUsers$.pipe(take(1)).subscribe(resolve)

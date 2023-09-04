@@ -12,7 +12,7 @@ import { UserEntity } from './user.model';
 export class UserEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.intializeUsers),
+      ofType(UserActions.loadUsers),
       concatMap(() =>
         this.apiService.getUsers().pipe(
           map((data: UserEntity[]) => {

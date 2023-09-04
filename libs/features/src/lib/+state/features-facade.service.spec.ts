@@ -4,9 +4,9 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { Observable, of } from 'rxjs';
 import { FeaturesFacadeService } from './features-facade.service';
-import { posts as PostsArray, users as UsersArray } from '../mocks/mocks';
-import { Post, PostEntity } from './post/post.model';
-import { UserEntity } from './user/user.model';
+import { posts as PostsArray, users as UsersArray } from '../mocks';
+import { Post, PostEntity } from './post';
+import { UserEntity } from './user';
 
 describe('FeaturesFacadeService', () => {
   let service: FeaturesFacadeService;

@@ -5,10 +5,8 @@ import { Action, Store } from '@ngrx/store';
 import { Observable, combineLatest, merge } from 'rxjs';
 import { concatMap, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
-import { getAllPosts, getPostsLoaded, Post, PostActions } from './index';
-import { UserActions, UserEntity } from './index';
-
-import { getAllUsers, getUsersLoaded } from './user/user.selectors';
+import { getAllPosts, getPostsLoaded, Post, PostActions } from './post';
+import { UserActions, UserEntity, getAllUsers, getUsersLoaded } from './user';
 
 @Injectable()
 export class FeaturesFacadeService {
@@ -35,8 +33,8 @@ export class FeaturesFacadeService {
       })
     );
 
-    this.store.dispatch(PostActions.intializePosts());
-    this.store.dispatch(UserActions.intializeUsers());
+    this.store.dispatch(PostActions.loadPosts());
+    this.store.dispatch(UserActions.loadUsers());
   }
 
   currentPostById(id: string): Observable<Post | undefined> {

@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { ApiService } from './api.service';
-import { posts as PostsArray, users as UsersArray } from '../mocks/mocks';
+import { posts as PostsArray, users as UsersArray } from '../mocks';
 
 describe('ApiService', () => {
   let service: ApiService;

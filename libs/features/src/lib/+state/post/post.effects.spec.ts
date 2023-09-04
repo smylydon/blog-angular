@@ -13,7 +13,7 @@ import { PostEffects } from './post.effects';
 import { PostActions } from './post.actions';
 import { NewPost, Post } from './post.model';
 import { ApiService, HelperService } from '../../services/index';
-import { posts as PostsArray } from '../../mocks/mocks';
+import { posts as PostsArray } from '../../mocks';
 
 describe('UserEffects', () => {
   const helper = new HelperService();
@@ -71,8 +71,8 @@ describe('UserEffects', () => {
       expect(effects).toBeTruthy();
     });
 
-    it('should get posts', async () => {
-      actions$.next(PostActions.intializePosts());
+    it('should loadPosts', async () => {
+      actions$.next(PostActions.loadPosts());
 
       const result = await new Promise((resolve) =>
         effects.loadPosts$.pipe(take(1)).subscribe(resolve)
@@ -183,7 +183,7 @@ describe('UserEffects', () => {
     });
 
     it('should throwError on getPosts', async () => {
-      actions$.next(PostActions.intializePosts());
+      actions$.next(PostActions.loadPosts());
 
       const result = await new Promise((resolve) =>
         effects.loadPosts$.pipe(take(1)).subscribe(resolve)

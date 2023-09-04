@@ -23,16 +23,16 @@ export const initialUsersState: UserState = usersAdapter.getInitialState({
   loaded: false,
 });
 
-export const reducer = createReducer(
+export const userReducer = createReducer(
   initialUsersState,
-  on(UserActions.intializeUsers, (state) => ({
+  on(UserActions.getUsers, (state) => ({
     ...state,
-    loaded: false,
+    loaded: true,
     error: null,
   })),
   on(UserActions.loadUsers, (state) => ({
     ...state,
-    loaded: true,
+    loaded: false,
     error: null,
   })),
   on(UserActions.loadUsersSuccess, (state, { users }) => {
@@ -44,6 +44,6 @@ export const reducer = createReducer(
   }))
 );
 
-export function userReducer(state: UserState | undefined, action: Action) {
-  return reducer(state, action);
+export function getUserReducer(state: UserState | undefined, action: Action) {
+  return userReducer(state, action);
 }

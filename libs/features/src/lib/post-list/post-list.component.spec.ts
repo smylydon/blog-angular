@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject, of } from 'rxjs';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
 import { Post, PostEntity } from '../+state/post/post.model';
 import { PostListComponent } from './post-list.component';
-import { posts as PostsArray } from '../mocks/mocks';
+import { posts as PostsArray } from '../mocks/mockPosts';
 import { HelperService } from './../services/index';
 
 describe('PostListComponent', () => {

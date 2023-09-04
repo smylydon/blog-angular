@@ -1,36 +1,36 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { POST_FEATURE_KEY, PostState, postsAdapter } from './post.reducer';
 
-export const selectFeaturesState =
+export const selectFeaturesPostsState =
   createFeatureSelector<PostState>(POST_FEATURE_KEY);
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   postsAdapter.getSelectors();
 
 export const getPostsLoaded = createSelector(
-  selectFeaturesState,
+  selectFeaturesPostsState,
   (state: PostState) => state.loaded
 );
 
 export const getPostsError = createSelector(
-  selectFeaturesState,
+  selectFeaturesPostsState,
   (state: PostState) => state.error
 );
 
 export const getAllPosts = createSelector(
-  selectFeaturesState,
+  selectFeaturesPostsState,
   (state: PostState) => {
     return selectAll(state);
   }
 );
 
 export const getPostEntities = createSelector(
-  selectFeaturesState,
+  selectFeaturesPostsState,
   (state: PostState) => selectEntities(state)
 );
 
 export const getSelectedPostId = createSelector(
-  selectFeaturesState,
+  selectFeaturesPostsState,
   (state: PostState) => state.selectedId
 );
 

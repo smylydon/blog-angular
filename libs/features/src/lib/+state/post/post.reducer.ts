@@ -22,16 +22,16 @@ export const initialPostsState: PostState = postsAdapter.getInitialState({
   loaded: false,
 });
 
-export const reducer = createReducer(
+export const postReducer = createReducer(
   initialPostsState,
-  on(PostActions.intializePosts, (state) => ({
+  on(PostActions.getPosts, (state) => ({
     ...state,
-    loaded: false,
+    loaded: true,
     error: null,
   })),
   on(PostActions.loadPosts, (state) => ({
     ...state,
-    loaded: true,
+    loaded: false,
     error: null,
   })),
   on(PostActions.loadPostsSuccess, (state, { posts }) => {
@@ -80,6 +80,6 @@ export const reducer = createReducer(
   }))
 );
 
-export function postReducer(state: PostState | undefined, action: Action) {
-  return reducer(state, action);
+export function getPostReducer(state: PostState | undefined, action: Action) {
+  return postReducer(state, action);
 }

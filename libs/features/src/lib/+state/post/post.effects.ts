@@ -12,7 +12,7 @@ import { Post } from './post.model';
 export class PostEffects {
   loadPosts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(PostActions.intializePosts),
+      ofType(PostActions.loadPosts),
       concatMap(() =>
         this.apiService.getPosts().pipe(
           map((posts: Post[]) => {
