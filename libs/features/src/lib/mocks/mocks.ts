@@ -1,4 +1,4 @@
-import { Post, PostEntity, UserEntity } from '../+state';
+import { PostEntity, UserEntity } from '../+state';
 
 export const users: UserEntity[] = [
   {

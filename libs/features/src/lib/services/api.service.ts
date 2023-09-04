@@ -6,15 +6,16 @@ import { map } from 'rxjs/operators';
 import { NewPost, Post, PostEntity } from '../+state/post/post.model';
 import { UserEntity } from '../+state/user/user.model';
 import { Update } from '@ngrx/entity';
+import { HelperService } from './helper.service';
 
 @Injectable()
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private helper: HelperService) {}
 
-  public getPosts(): Observable<PostEntity[]> {
+  public getPosts(): Observable<Post[]> {
     return this.http.get<PostEntity[]>('posts').pipe(
       map((response) => {
-        return response as PostEntity[];
+        return this.helper.convertPostEntityToPost(response as PostEntity[]);
       })
     );
   }
@@ -27,13 +28,15 @@ export class ApiService {
     );
   }
 
-  public savePost(post: NewPost): Observable<PostEntity> {
+  public savePost(post: NewPost): Observable<Post> {
     return this.http.post<PostEntity>('posts', JSON.stringify(post)).pipe(
       map((data: { id: number }) => {
-        return <PostEntity>{
+        const postEntity: PostEntity = {
           ...post,
           id: data.id,
         };
+        const posts: Post[] = this.helper.convertPostEntityToPost([postEntity]);
+        return posts[0];
       })
     );
   }

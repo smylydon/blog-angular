@@ -8,26 +8,15 @@ import { FeaturesFacadeService } from '../+state/features-facade.service';
 import { Post, PostEntity } from '../+state/post/post.model';
 import { PostListComponent } from './post-list.component';
 import { posts as PostsArray } from '../mocks/mocks';
+import { HelperService } from './../services/index';
 
 describe('PostListComponent', () => {
   let compiled: HTMLElement;
   let component: PostListComponent;
   let fixture: ComponentFixture<PostListComponent>;
+  const helper = new HelperService();
   const posts$: Subject<Post[]> = new BehaviorSubject<Post[]>([]);
-  const posts: Post[] = PostsArray.map<Post>((post: PostEntity) => {
-    return <Post>{
-      ...post,
-      date: new Date().toISOString(),
-      name: 'Fred Flintstone',
-      reactions: {
-        thumbsUp: 0,
-        wow: 0,
-        heart: 0,
-        rocket: 0,
-        coffee: 0,
-      },
-    };
-  });
+  const posts: Post[] = helper.convertPostEntityToPost(PostsArray);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

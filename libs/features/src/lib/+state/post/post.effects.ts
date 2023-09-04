@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 
 import { PostActions } from './post.actions';
 import { ApiService } from '../../services/api.service';
-import { Post, PostEntity, NewPost } from './post.model';
+import { Post } from './post.model';
 
 @Injectable()
 export class PostEffects {
@@ -15,22 +15,7 @@ export class PostEffects {
       ofType(PostActions.intializePosts),
       concatMap(() =>
         this.apiService.getPosts().pipe(
-          map((data: PostEntity[]) => {
-            const posts: Post[] = (data || data).map<Post>(
-              (post: PostEntity) => {
-                return <Post>{
-                  ...post,
-                  date: new Date().toISOString(),
-                  reactions: {
-                    thumbsUp: 0,
-                    wow: 0,
-                    heart: 0,
-                    rocket: 0,
-                    coffee: 0,
-                  },
-                };
-              }
-            );
+          map((posts: Post[]) => {
             return PostActions.loadPostsSuccess({
               posts,
             });
@@ -48,19 +33,7 @@ export class PostEffects {
       ofType(PostActions.savePost),
       concatMap(({ post }) =>
         this.apiService.savePost(post).pipe(
-          map((data: PostEntity) => {
-            const post: Post = <Post>{
-              ...data,
-              date: new Date().toISOString(),
-              reactions: {
-                thumbsUp: 0,
-                wow: 0,
-                heart: 0,
-                rocket: 0,
-                coffee: 0,
-              },
-            };
-
+          map((post: Post) => {
             return PostActions.savePostSuccess({
               post,
             });
