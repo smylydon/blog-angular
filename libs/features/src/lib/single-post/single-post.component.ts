@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { PostActions } from '../+state/post/post.actions';
@@ -18,8 +18,10 @@ import { FeaturesFacadeService } from '../+state/features-facade.service';
   styleUrls: ['./single-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SinglePostComponent implements OnInit, OnDestroy {
-  public post: Post | undefined;
+export class SinglePostComponent {
+  public post$: Observable<Post | undefined> = this.facade.postFromRouteOrId(
+    this.activedRoute
+  );
 
   private subscription: Subscription = new Subscription();
 
@@ -27,18 +29,6 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     private activedRoute: ActivatedRoute,
     private facade: FeaturesFacadeService
   ) {}
-
-  ngOnInit(): void {
-    this.subscription.add(
-      this.facade
-        .postFromRouteOrId(this.activedRoute)
-        .subscribe((post: Post | undefined) => (this.post = post))
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   public emitPost(updateObject: UpdateObject) {
     const post: Post = updateObject.post;

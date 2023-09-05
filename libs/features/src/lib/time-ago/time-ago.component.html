@@ -1,3 +1,3 @@
 <span [title]="timestamp">
-  &nbsp; <i>{{ timestamp | timeAgo }}</i>
+  &nbsp; <i *ngIf="timestamp">{{ timestamp | timeAgo }}</i>
 </span>

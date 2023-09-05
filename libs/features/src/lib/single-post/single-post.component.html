@@ -1,15 +1,15 @@
-<article *ngIf="post; else notFound">
-  <h2>{{ post.title }}</h2>
-  <p class="excerpt">{{ post.body }}...</p>
+<article *ngIf="post$ | async; else notFound">
+  <h2>{{ (post$ | async)?.title }}</h2>
+  <p class="excerpt">{{ (post$ | async)?.body }}...</p>
   <p class="post-credit">
-    <a [routerLink]="['/edit', post.id]">Edit Post</a>
+    <a [routerLink]="['/edit', (post$ | async)?.id]">Edit Post</a>
 
-    <span>{{ post.name }}</span>
+    <span>{{ (post$ | async)?.name }}</span>
 
-    <lib-time-ago [timestamp]="post.date" />
+    <lib-time-ago [timestamp]="(post$ | async)?.date" />
   </p>
   <lib-reaction-buttons
-    [post]="post"
+    [post]="post$ | async"
     (newPost)="emitPost($event)"
   ></lib-reaction-buttons>
 </article>

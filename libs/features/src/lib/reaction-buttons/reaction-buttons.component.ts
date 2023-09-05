@@ -15,7 +15,10 @@ import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactionButtonsComponent {
-  @Input() post: Post = {
+  @Input('post') set setPost(post: any) {
+    this.post = post ? <Post>post : this.post;
+  }
+  post: Post = {
     id: 0,
     title: '',
     userId: 0,
