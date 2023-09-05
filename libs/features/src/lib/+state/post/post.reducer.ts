@@ -7,7 +7,6 @@ export const POST_FEATURE_KEY = 'posts';
 
 export interface PostState extends EntityState<Post> {
   selectedId?: string | number; // which Labels record has been selected
-  status: string; //'idle' | 'loading' | 'succeeded' | 'failed'
   loaded: boolean;
   error?: Error | null; // last known error (if any)
 }
@@ -18,66 +17,48 @@ export const postsAdapter: EntityAdapter<Post> = createEntityAdapter<Post>({
 
 export const initialPostsState: PostState = postsAdapter.getInitialState({
   // set initial required properties
-  status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   loaded: false,
+  error: null,
 });
+
+const setState = (
+  state: PostState,
+  loaded: boolean,
+  error: Error | null = null
+) => {
+  return <PostState>{ ...state, loaded, error };
+};
 
 export const postReducer = createReducer(
   initialPostsState,
-  on(PostActions.getPosts, (state) => ({
-    ...state,
-    loaded: true,
-    error: null,
-  })),
-  on(PostActions.loadPosts, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(PostActions.getPosts, (state) => setState(state, true, null)),
+  on(PostActions.loadPosts, (state) => setState(state, false, null)),
   on(PostActions.loadPostsSuccess, (state, { posts }) => {
-    return postsAdapter.setAll(posts, { ...state, loaded: true });
+    return postsAdapter.setAll(posts, setState(state, true, null));
   }),
-  on(PostActions.loadPostsFailure, (state, { error }) => ({
-    ...state,
-    loaded: true,
-    error,
-  })),
-  on(PostActions.loadPostsFailure, (state, { error }) => ({
-    ...state,
-    loaded: true,
-    error,
-  })),
-
+  on(PostActions.loadPostsFailure, (state, { error }) =>
+    setState(state, true, error)
+  ),
   on(PostActions.savePostSuccess, (state, { post }) => {
-    return postsAdapter.addOne(post, { ...state, loaded: true, error: null });
+    return postsAdapter.addOne(post, setState(state, true, null));
   }),
-  on(PostActions.savePostFailure, (state, { error }) => ({
-    ...state,
-    loaded: true,
-    error,
-  })),
+  on(PostActions.savePostFailure, (state, { error }) =>
+    setState(state, true, error)
+  ),
 
   on(PostActions.updatePostSuccess, (state, { update }) => {
     return postsAdapter.updateOne(update, state);
   }),
-  on(PostActions.updatePostFailure, (state, { error }) => ({
-    ...state,
-    loaded: true,
-    error,
-  })),
+  on(PostActions.updatePostFailure, (state, { error }) =>
+    setState(state, true, error)
+  ),
 
   on(PostActions.deletePostSuccess, (state, { post_id }) => {
-    return postsAdapter.removeOne(post_id, {
-      ...state,
-      loaded: true,
-      error: null,
-    });
+    return postsAdapter.removeOne(post_id, setState(state, true, null));
   }),
-  on(PostActions.deletePostFailure, (state, { error }) => ({
-    ...state,
-    loaded: true,
-    error,
-  }))
+  on(PostActions.deletePostFailure, (state, { error }) =>
+    setState(state, true, error)
+  )
 );
 
 export function getPostReducer(state: PostState | undefined, action: Action) {

@@ -7,7 +7,6 @@ export const USER_FEATURE_KEY = 'users';
 
 export interface UserState extends EntityState<UserEntity> {
   selectedId?: string | number; // which Labels record has been selected
-  status: string; //'idle' | 'loading' | 'succeeded' | 'failed'
   loaded: boolean;
   error?: Error | null; // last known error (if any)
 }
@@ -19,29 +18,28 @@ export const usersAdapter: EntityAdapter<UserEntity> =
 
 export const initialUsersState: UserState = usersAdapter.getInitialState({
   // set initial required properties
-  status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   loaded: false,
+  error: null,
 });
+
+const setState = (
+  state: UserState,
+  loaded: boolean,
+  error: Error | null = null
+) => {
+  return <UserState>{ ...state, loaded, error };
+};
 
 export const userReducer = createReducer(
   initialUsersState,
-  on(UserActions.getUsers, (state) => ({
-    ...state,
-    loaded: true,
-    error: null,
-  })),
-  on(UserActions.loadUsers, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(UserActions.getUsers, (state) => setState(state, true)),
+  on(UserActions.loadUsers, (state) => setState(state, false)),
   on(UserActions.loadUsersSuccess, (state, { users }) => {
-    return usersAdapter.setAll(users, { ...state, loaded: true });
+    return usersAdapter.setAll(users, setState(state, true));
   }),
-  on(UserActions.loadUsersFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(UserActions.loadUsersFailure, (state, { error }) =>
+    setState(state, true, error)
+  )
 );
 
 export function getUserReducer(state: UserState | undefined, action: Action) {
