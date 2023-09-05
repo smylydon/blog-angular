@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { PostActions } from './post.actions';
 import { ApiService } from '../../services/api.service';
 import { Post } from './post.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PostEffects {
@@ -51,6 +52,7 @@ export class PostEffects {
       ofType(PostActions.deletePost),
       concatMap(({ post_id }) =>
         this.apiService.deletePost(post_id).pipe(
+          tap(() => this.router.navigateByUrl('/')),
           map((data: number) => {
             return PostActions.deletePostSuccess({
               post_id: data,
@@ -69,6 +71,10 @@ export class PostEffects {
       ofType(PostActions.updatePost),
       concatMap(({ update }) =>
         this.apiService.updatePost(update).pipe(
+          tap(() => {
+            const url = '/post/' + update.id;
+            this.router.navigateByUrl(url);
+          }),
           map(() => {
             return PostActions.updatePostSuccess({
               update,
@@ -81,5 +87,9 @@ export class PostEffects {
       )
     );
   });
-  constructor(private actions$: Actions, private apiService: ApiService) {}
+  constructor(
+    private actions$: Actions,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 }
