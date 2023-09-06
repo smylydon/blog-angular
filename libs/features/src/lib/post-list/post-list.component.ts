@@ -31,7 +31,7 @@ export class PostListComponent {
     reactions[emoji] = post.reactions[emoji] + 1;
 
     this.facade.dispatch(
-      PostActions.updatePost({
+      PostActions.updateReaction({
         update: {
           id: post.id,
           changes: {

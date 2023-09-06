@@ -47,12 +47,14 @@ export const postReducer = createReducer(
   ),
 
   on(PostActions.updatePostSuccess, (state, { update }) => {
-    return postsAdapter.updateOne(update, state);
+    return postsAdapter.updateOne(update, setState(state, true));
   }),
   on(PostActions.updatePostFailure, (state, { error }) =>
     setState(state, true, error)
   ),
-
+  on(PostActions.updateReaction, (state, { update }) => {
+    return postsAdapter.updateOne(update, setState(state, true));
+  }),
   on(PostActions.deletePostSuccess, (state, { post_id }) => {
     return postsAdapter.removeOne(post_id, setState(state, true, null));
   }),

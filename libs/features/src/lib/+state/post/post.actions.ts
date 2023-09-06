@@ -15,6 +15,7 @@ export const PostActions = createActionGroup({
     'Update Post': props<{ update: Update<Post> }>(),
     'Update Post Success': props<{ update: Update<Post> }>(),
     'Update Post Failure': props<{ error: Error }>(),
+    'Update Reaction': props<{ update: Update<Post> }>(),
     'Delete Post': props<{ post_id: number }>(),
     'Delete Post Success': props<{ post_id: number }>(),
     'Delete Post Failure': props<{ error: Error }>(),

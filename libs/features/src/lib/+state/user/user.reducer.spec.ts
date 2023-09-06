@@ -54,4 +54,20 @@ describe('User Reducer', () => {
       expect(result.error).toBeNull();
     });
   });
+
+  describe('an loadUsersFailure action', () => {
+    it('should return the previous state', () => {
+      const error: Error = new Error('Test Error');
+
+      const action = UserActions.loadUsersFailure({
+        error,
+      });
+
+      const result = userReducer(initialUsersState, action);
+
+      expect(result.loaded).toBe(true);
+      expect(result.error).not.toBeNull();
+      expect(result.error).toEqual(error);
+    });
+  });
 });

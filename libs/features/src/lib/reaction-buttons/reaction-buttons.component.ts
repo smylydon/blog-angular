@@ -15,10 +15,10 @@ import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactionButtonsComponent {
-  @Input('post') set setPost(post: any) {
-    this.post = post ? <Post>post : this.post;
+  @Input() set post(post: any) {
+    this.aPost = post ? <Post>post : this.aPost;
   }
-  post: Post = {
+  aPost: Post = {
     id: 0,
     title: '',
     userId: 0,
@@ -42,11 +42,10 @@ export class ReactionButtonsComponent {
     rocket: '🚀',
     coffee: '☕',
   };
-  constructor() {}
 
   public increment(emoji: string) {
     this.newPost.emit({
-      post: this.post,
+      post: this.aPost,
       value: emoji as Reactions,
     });
   }
