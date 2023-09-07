@@ -1,12 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { PostActions } from '../+state/post/post.actions';
@@ -22,8 +17,6 @@ export class SinglePostComponent {
   public post$: Observable<Post | undefined> = this.facade.postFromRouteOrId(
     this.activedRoute
   );
-
-  private subscription: Subscription = new Subscription();
 
   constructor(
     private activedRoute: ActivatedRoute,

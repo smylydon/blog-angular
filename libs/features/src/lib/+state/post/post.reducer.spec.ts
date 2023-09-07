@@ -75,4 +75,55 @@ describe('Post Reducer', () => {
       expect(result.error).toEqual(error);
     });
   });
+
+  describe('an updateReaction action', () => {
+    it('should return the previous state', () => {
+      const action = PostActions.loadPostsSuccess({
+        posts: postsList,
+      });
+
+      const stateOne = postReducer(initialPostsState, action);
+      const posts = Object.values(stateOne.entities);
+
+      const post = posts[0];
+      const post_id = post?.id;
+      const reactions = Object.assign(
+        {},
+        {
+          thumbsUp: 0,
+          wow: 0,
+          heart: 0,
+          rocket: 0,
+          coffee: 0,
+        },
+        {
+          ...post?.reactions,
+        }
+      );
+      reactions['thumbsUp'] = (post?.reactions['thumbsUp'] ?? 0) + 1;
+
+      const action2 = PostActions.updateReaction({
+        update: {
+          id: post?.id ?? 0,
+          changes: {
+            reactions,
+          },
+        },
+      });
+
+      const stateTwo = postReducer(stateOne, action2);
+      const posts2: Post[] = <Post[]>Object.values(stateTwo.entities);
+      const testPost: Post | undefined = posts2.find(
+        (aPost: Post) => aPost.id === post_id
+      );
+      const testThumbsUp = testPost?.reactions?.thumbsUp ?? 0;
+
+      expect(posts2.length).toEqual(postsList.length);
+      expect(posts2).not.toEqual(postsList);
+      expect(testPost).toBeDefined();
+      expect(testThumbsUp).toEqual(1);
+      expect(stateTwo.loaded).toBe(true);
+      expect(stateTwo.error).toBeNull();
+    });
+  });
 });

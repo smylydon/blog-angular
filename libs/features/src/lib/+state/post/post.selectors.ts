@@ -4,8 +4,7 @@ import { POST_FEATURE_KEY, PostState, postsAdapter } from './post.reducer';
 export const selectFeaturesPostsState =
   createFeatureSelector<PostState>(POST_FEATURE_KEY);
 
-const { selectIds, selectEntities, selectAll, selectTotal } =
-  postsAdapter.getSelectors();
+const { selectEntities, selectAll } = postsAdapter.getSelectors();
 
 export const getPostsLoaded = createSelector(
   selectFeaturesPostsState,
