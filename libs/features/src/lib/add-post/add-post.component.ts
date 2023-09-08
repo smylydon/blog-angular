@@ -53,6 +53,7 @@ export class AddPostComponent implements OnInit {
       userId: post.postAuthor,
       body: post.postContent,
     };
+    this.postForm.reset();
     this.facade.dispatch(PostActions.savePost({ post: newPost }));
   }
 
