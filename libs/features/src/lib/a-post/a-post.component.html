@@ -1,0 +1,16 @@
+<article *ngIf="post">
+  <h2>{{ post.title }}</h2>
+  <p class="excerpt">{{ post.body }}...</p>
+  <p class="post-credit">
+    <a *ngIf="isSingle" [routerLink]="['/edit', post.id]">Edit Post</a>
+    <a *ngIf="!isSingle" [routerLink]="['/post', post.id]">View Post</a>
+
+    <span>{{ post.name }}</span>
+
+    <lib-time-ago [timestamp]="post.date" />
+  </p>
+  <lib-reaction-buttons
+    [post]="post"
+    (newPost)="emitPost($event)"
+  ></lib-reaction-buttons>
+</article>

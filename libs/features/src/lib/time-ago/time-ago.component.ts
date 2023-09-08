@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeAgoComponent {
-  @Input('timestamp') set setter(timestamp: any) {
-    this.timestamp = timestamp ?? '';
+  @Input() set timestamp(timestamp: any) {
+    this.currentTimestamp = timestamp ?? '';
   }
-  timestamp = '';
+  currentTimestamp = '';
 }

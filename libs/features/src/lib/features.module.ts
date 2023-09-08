@@ -21,6 +21,7 @@ import { TimeAgoComponent } from './time-ago/time-ago.component';
 import { ApiService } from './services';
 
 import { ReactionButtonCountPipe, TimeAgoPipe } from './pipes';
+import { APostComponent } from './a-post/a-post.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { ReactionButtonCountPipe, TimeAgoPipe } from './pipes';
     ReactionButtonsComponent,
     TimeAgoPipe,
     TimeAgoComponent,
+    APostComponent,
   ],
   providers: [
     ApiService,

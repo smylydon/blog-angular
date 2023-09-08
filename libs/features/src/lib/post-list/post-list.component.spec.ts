@@ -5,7 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BehaviorSubject, Subject, of } from 'rxjs';
 
 import { FeaturesFacadeService } from '../+state/features-facade.service';
-import { Post, PostEntity } from '../+state/post/post.model';
+import { Post } from '../+state/post/post.model';
 import { PostListComponent } from './post-list.component';
 import { posts as PostsArray } from '../mocks/mockPosts';
 import { HelperService } from './../services/index';
@@ -47,15 +47,15 @@ describe('PostListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not show any articles', () => {
-    const selected = compiled.querySelectorAll('article');
+  it('should not show any lib-a-post', () => {
+    const selected = compiled.querySelectorAll('lib-a-post');
     expect(selected.length).toBe(0);
   });
 
-  it('should show 100 articles', () => {
+  it('should show 100 lib-a-post', () => {
     posts$.next(posts);
     fixture.detectChanges();
-    const selected = compiled.querySelectorAll('article');
+    const selected = compiled.querySelectorAll('lib-a-post');
     expect(selected.length).toBe(100);
   });
 });

@@ -1,15 +1,6 @@
-<article *ngFor="let post of posts$ | async; trackBy: trackBy">
-  <h2>{{ post.title }}</h2>
-  <p class="excerpt">{{ post.body }}...</p>
-  <p class="post-credit">
-    <a [routerLink]="['/post', post.id]">View Post</a>
-
-    <span>{{ post.name }}</span>
-
-    <lib-time-ago [timestamp]="post.date" />
-  </p>
-  <lib-reaction-buttons
-    [post]="post"
-    (newPost)="emitPost($event)"
-  ></lib-reaction-buttons>
-</article>
+<lib-a-post
+  *ngFor="let post of posts$ | async; trackBy: trackBy"
+  [post]="post"
+  [isSingle]="false"
+  (update)="emitPost($event)"
+></lib-a-post>
