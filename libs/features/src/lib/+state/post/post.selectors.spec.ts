@@ -36,7 +36,7 @@ describe('Post Selectors', () => {
   });
 
   describe('Posts slice', () => {
-    let state: any;
+    let state: PostState;
     beforeEach(() => {
       state = selectFeaturesPostsState({
         [fromFeatures.POST_FEATURE_KEY]: {
@@ -55,6 +55,11 @@ describe('Post Selectors', () => {
       const loaded = getPostsLoaded(state);
       expect(loaded).toEqual(false);
     });
+
+    // it('should return loaded property', () => {
+    //   const loaded = getPostsError(state);
+    //   expect(loaded).toEqual(false);
+    // });
 
     it('should return all entities', () => {
       const currentEntities = getPostEntities(state);
