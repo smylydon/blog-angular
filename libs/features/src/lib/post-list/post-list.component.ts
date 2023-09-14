@@ -6,12 +6,20 @@ import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { PostActions } from '../+state/post/post.actions';
 
 import { FeaturesFacadeService } from '../+state/features-facade.service';
+import { APostComponent } from '../a-post/a-post.component';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'lib-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-post-list',
+    templateUrl: './post-list.component.html',
+    styleUrls: ['./post-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgFor,
+        APostComponent,
+        AsyncPipe,
+    ],
 })
 export class PostListComponent {
   public posts$: Observable<Post[]> = this.facade.posts$;

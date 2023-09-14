@@ -6,12 +6,20 @@ import { Observable } from 'rxjs';
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { PostActions } from '../+state/post/post.actions';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
+import { APostComponent } from '../a-post/a-post.component';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'lib-single-post',
-  templateUrl: './single-post.component.html',
-  styleUrls: ['./single-post.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-single-post',
+    templateUrl: './single-post.component.html',
+    styleUrls: ['./single-post.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        APostComponent,
+        AsyncPipe,
+    ],
 })
 export class SinglePostComponent {
   public post$: Observable<Post | undefined> = this.facade.postFromRouteOrId(

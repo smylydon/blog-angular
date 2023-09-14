@@ -8,7 +8,9 @@ import { concatMap, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { getAllPosts, getPostsLoaded, Post, PostActions } from './post';
 import { UserActions, UserEntity, getAllUsers, getUsersLoaded } from './user';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FeaturesFacadeService {
   public justPosts$: Observable<Post[]>;
   public justUsers$: Observable<UserEntity[]>;

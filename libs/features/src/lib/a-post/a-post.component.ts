@@ -7,15 +7,25 @@ import {
 } from '@angular/core';
 
 import { Post, UpdateObject } from '../+state/post/post.model';
+import { ReactionButtonsComponent } from '../reaction-buttons/reaction-buttons.component';
+import { TimeAgoComponent } from '../time-ago/time-ago.component';
+import { RouterLink } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'lib-a-post',
-  templateUrl: './a-post.component.html',
-  styleUrls: ['./a-post.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-a-post',
+    templateUrl: './a-post.component.html',
+    styleUrls: ['./a-post.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        RouterLink,
+        TimeAgoComponent,
+        ReactionButtonsComponent,
+    ],
 })
 export class APostComponent {
-  // eslint-disable-line
   @Input() post: Post | null | undefined = undefined;
   @Input() isSingle = true;
   @Output() update: EventEmitter<UpdateObject> = new EventEmitter();

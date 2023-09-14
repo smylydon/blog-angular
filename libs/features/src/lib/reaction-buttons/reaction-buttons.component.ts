@@ -7,12 +7,16 @@ import {
 } from '@angular/core';
 
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
+import { ReactionButtonCountPipe } from '../pipes/reaction-button-count.pipe';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'lib-reaction-buttons',
-  templateUrl: './reaction-buttons.component.html',
-  styleUrls: ['./reaction-buttons.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-reaction-buttons',
+    templateUrl: './reaction-buttons.component.html',
+    styleUrls: ['./reaction-buttons.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgFor, ReactionButtonCountPipe],
 })
 export class ReactionButtonsComponent {
   @Input() set post(post: any) {

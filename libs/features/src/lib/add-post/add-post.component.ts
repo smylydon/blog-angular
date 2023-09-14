@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -13,12 +8,19 @@ import { NewPost } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'lib-add-post',
-  templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-add-post',
+    templateUrl: './add-post.component.html',
+    styleUrls: ['./add-post.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        NgFor,
+        AsyncPipe,
+    ],
 })
 export class AddPostComponent implements OnInit {
   public users$: Observable<UserEntity[]> = this.facade.justUsers$;

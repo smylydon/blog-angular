@@ -8,7 +8,9 @@ import { UserEntity } from '../+state/user/user.model';
 import { Update } from '@ngrx/entity';
 import { HelperService } from './helper.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiService {
   constructor(private http: HttpClient, private helper: HelperService) {}
 
