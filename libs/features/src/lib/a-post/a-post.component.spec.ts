@@ -7,7 +7,7 @@ describe('APostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [APostComponent],
+      imports: [APostComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(APostComponent);

@@ -12,7 +12,7 @@ describe('SinglePostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SinglePostComponent],
+      imports: [SinglePostComponent],
       providers: [
         {
           provide: ActivatedRoute,

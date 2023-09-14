@@ -13,8 +13,7 @@ describe('EditPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [EditPostComponent],
+      imports: [ReactiveFormsModule, EditPostComponent],
       providers: [
         {
           provide: ActivatedRoute,

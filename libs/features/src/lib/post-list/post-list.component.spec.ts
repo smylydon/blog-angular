@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { BehaviorSubject, Subject, of } from 'rxjs';
 
 import { FeaturesFacadeService } from '../+state/features-facade.service';
@@ -20,8 +22,14 @@ describe('PostListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostListComponent],
+      imports: [PostListComponent],
       providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 123 }),
+          },
+        },
         {
           provide: FeaturesFacadeService,
           useValue: {

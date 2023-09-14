@@ -29,8 +29,7 @@ describe('TimeAgoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TimeAgoComponent, TimeAgoPipe],
-      providers: [],
+      imports: [TimeAgoComponent, TimeAgoPipe],
     })
       .overrideComponent(TimeAgoComponent, {
         set: { changeDetection: ChangeDetectionStrategy.Default },

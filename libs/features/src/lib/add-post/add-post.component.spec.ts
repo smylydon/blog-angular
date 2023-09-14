@@ -15,8 +15,7 @@ describe('AddPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [AddPostComponent],
+      imports: [ReactiveFormsModule, AddPostComponent],
       providers: [
         {
           provide: FeaturesFacadeService,

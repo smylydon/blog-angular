@@ -8,7 +8,7 @@ describe('ReactionButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReactionButtonsComponent, ReactionButtonCountPipe],
+      imports: [ReactionButtonsComponent, ReactionButtonCountPipe],
       providers: [ReactionButtonCountPipe],
     }).compileComponents();
 
