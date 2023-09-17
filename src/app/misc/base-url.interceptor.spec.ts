@@ -3,9 +3,14 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { BaseUrlInterceptor } from './base-url.interceptor';
+import {
+  baseUrlInterceptor,
+  BASE_API_URL,
+  BASE_API_URL_INTERFACE,
+} from './base-url.interceptor';
 import { HttpClient } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 describe('BaseUrlInterceptor', () => {
   let httpService: HttpClient;
@@ -13,18 +18,21 @@ describe('BaseUrlInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
       providers: [
         {
-          provide: HTTP_INTERCEPTORS,
-          useClass: BaseUrlInterceptor,
-          multi: true,
+          provide: BASE_API_URL,
+          useFactory: () =>
+            <BASE_API_URL_INTERFACE>{
+              production: false,
+              apiUrl: 'http://testing:8080/api',
+            },
         },
-        { provide: 'BASE_API_URL', useValue: 'http://testing:8080/api' },
+        provideHttpClient(withInterceptors([baseUrlInterceptor])),
+        provideHttpClientTesting(),
       ],
     });
-    httpMock = TestBed.get(HttpTestingController);
-    httpService = TestBed.get(HttpClient);
+    httpMock = TestBed.inject(HttpTestingController);
+    httpService = TestBed.inject(HttpClient);
   });
 
   it('should add url path', () => {
