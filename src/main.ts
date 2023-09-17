@@ -1,13 +1,16 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment.dev';
-import { BaseUrlInterceptor } from './app/misc/base-url.interceptor';
+import {
+  baseUrlInterceptor,
+  BASE_API_URL,
+} from './app/misc/base-url.interceptor';
 import { metaReducers } from './app/misc/debug.metareducer';
 
 import { appRoutes } from './app/app.routes';
@@ -40,12 +43,7 @@ bootstrapApplication(AppComponent, {
           logOnly: environment.production, // Restrict extension to log-only mode
         })
       : [],
-    { provide: 'BASE_API_URL', useValue: environment.apiUrl },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: BaseUrlInterceptor,
-      multi: true,
-    },
-    importProvidersFrom(HttpClientModule),
+    { provide: BASE_API_URL, useFactory: () => environment },
+    provideHttpClient(withInterceptors([baseUrlInterceptor])),
   ],
 }).catch((err) => console.error(err));

@@ -1,22 +1,16 @@
-import { Inject, Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { inject, InjectionToken } from '@angular/core';
+import { HttpInterceptorFn } from '@angular/common/http';
 
-@Injectable()
-export class BaseUrlInterceptor implements HttpInterceptor {
-  constructor(@Inject('BASE_API_URL') private baseUrl: string) {}
-
-  intercept(
-    request: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
-
-    return next.handle(apiReq);
-  }
+export interface BASE_API_URL_INTERFACE {
+  production: boolean;
+  apiUrl: string;
 }
+export const BASE_API_URL = new InjectionToken<BASE_API_URL_INTERFACE>('');
+
+export const baseUrlInterceptor: HttpInterceptorFn = (req, next) => {
+  const baseUrl: BASE_API_URL_INTERFACE = inject(BASE_API_URL);
+
+  const apiReq = req.clone({ url: `${baseUrl.apiUrl}/${req.url}` });
+
+  return next(apiReq);
+};
