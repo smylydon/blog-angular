@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { Post } from '../+state/post/post.model';
 import { singlePostResolver } from './single-post.resolver';
-import { FeaturesFacadeService } from '../+state/features-facade.service';
 
 describe('singlePostResolver', () => {
   const executeResolver: ResolveFn<Observable<Post | undefined>> = (

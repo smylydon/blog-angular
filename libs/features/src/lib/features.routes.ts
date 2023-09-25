@@ -1,7 +1,6 @@
-import { NgModule, importProvidersFrom } from '@angular/core';
-import { RouterModule, Route } from '@angular/router';
+import { Route } from '@angular/router';
 
-import { provideStore, provideState } from '@ngrx/store';
+import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 
 import { AddPostComponent } from './add-post/add-post.component';
@@ -13,34 +12,41 @@ import { singlePostResolver } from './resolvers/single-post.resolver';
 import * as fromPosts from './+state/post/post.reducer';
 import * as fromUsers from './+state/user/user.reducer';
 import { PostEffects, UserEffects } from './+state';
+import { LayoutComponent } from './layout/layout.component';
 
 export const featuresRoutes: Route[] = [
   {
     path: '',
-    component: PostListComponent,
+    component: LayoutComponent,
     providers: [
       provideState(fromPosts.POST_FEATURE_KEY, fromPosts.postReducer),
       provideEffects(PostEffects),
       provideState(fromUsers.USER_FEATURE_KEY, fromUsers.userReducer),
       provideEffects(UserEffects),
     ],
-  },
-  {
-    path: 'edit/:id',
-    component: EditPostComponent,
-    resolve: {
-      routeResolver: singlePostResolver,
-    },
-  },
-  {
-    path: 'post',
-    component: AddPostComponent,
-  },
-  {
-    path: 'post/:id',
-    component: SinglePostComponent,
-    resolve: {
-      routeResolver: singlePostResolver,
-    },
+    children: [
+      {
+        path: '',
+        component: PostListComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditPostComponent,
+        resolve: {
+          routeResolver: singlePostResolver,
+        },
+      },
+      {
+        path: 'post',
+        component: AddPostComponent,
+      },
+      {
+        path: 'post/:id',
+        component: SinglePostComponent,
+        resolve: {
+          routeResolver: singlePostResolver,
+        },
+      },
+    ],
   },
 ];
