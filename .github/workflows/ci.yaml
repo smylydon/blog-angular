@@ -1,14 +1,13 @@
 name: CI
 on:
   push:
-    branches:
-      # Change this if your primary branch is not main
-      - main
+    branches: [main]
   pull_request:
+    branches: [master]
 
 jobs:
   main:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,7 +15,7 @@ jobs:
       # Cache node_modules
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
           cache: 'npm'
       - run: npm ci
       - uses: nrwl/nx-set-shas@v3
