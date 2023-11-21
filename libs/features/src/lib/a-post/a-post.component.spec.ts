@@ -5,17 +5,19 @@ describe('APostComponent', () => {
   let component: APostComponent;
   let fixture: ComponentFixture<APostComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [APostComponent],
-    }).compileComponents();
+  describe('isSingle', () => {
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
+        imports: [APostComponent],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(APostComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      fixture = TestBed.createComponent(APostComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });
