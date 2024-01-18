@@ -41,6 +41,7 @@ bootstrapApplication(AppComponent, {
       ? provideStoreDevtools({
           maxAge: 25, // Retains last 25 states
           logOnly: environment.production, // Restrict extension to log-only mode
+          connectInZone: true,
         })
       : [],
     { provide: BASE_API_URL, useFactory: () => environment },
