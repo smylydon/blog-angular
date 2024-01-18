@@ -1,1 +1,1 @@
-export const getGreeting = () => cy.get('h1');
+export const getNavMenu = () => cy.get('nav > ul');
