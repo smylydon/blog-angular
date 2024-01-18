@@ -4,6 +4,7 @@ describe('blog', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display Redux Blog', () => {
+    cy.url().should('eq', 'http://localhost:4200/');
     cy.get('h1').contains('Redux Blog');
   });
 
@@ -17,7 +18,12 @@ describe('blog', () => {
     cy.get('lib-post-list').children().should('have.length', 100);
   });
 
-  it('should display 100 blog items', () => {
-    cy.get('lib-post-list').children().should('have.length', 100);
+  it('should be able to navigate to Post', () => {
+    getNavMenu()
+      .children()
+      .eq(1)
+      .click()
+      .url()
+      .should('eq', 'http://localhost:4200/post');
   });
 });
