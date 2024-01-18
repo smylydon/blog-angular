@@ -1,13 +1,29 @@
-import { getGreeting } from '../support/app.po';
+import { getNavMenu } from '../support/app.po';
 
 describe('blog', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display Redux Blog', () => {
+    cy.url().should('eq', 'http://localhost:4200/');
+    cy.get('h1').contains('Redux Blog');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome blog');
+  it('should display Home and Post links', () => {
+    getNavMenu().children().should('have.length', 2);
+    getNavMenu().children().first().contains('Home');
+    getNavMenu().children().next().contains('Post');
+  });
+
+  it('should display 100 posts', () => {
+    cy.get('lib-post-list').children().should('have.length', 100);
+  });
+
+  it('should be able to navigate to Post', () => {
+    getNavMenu()
+      .children()
+      .eq(1)
+      .click()
+      .url()
+      .should('eq', 'http://localhost:4200/post');
   });
 });
