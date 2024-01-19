@@ -4,11 +4,8 @@ import { UserEntity } from './user.model';
 import * as fromFeatures from './user.reducer';
 import {
   getUsersLoaded,
-  getUsersError,
   getAllUsers,
   getUserEntities,
-  getSelectedUserId,
-  getSelectedUser,
   selectFeaturesUsersState,
 } from './user.selectors';
 import { users as UsersArray } from './../../mocks';
@@ -34,7 +31,7 @@ describe('User Selectors', () => {
   });
 
   describe('Users slice', () => {
-    let state: any;
+    let state: UserState;
     beforeEach(() => {
       state = selectFeaturesUsersState({
         [fromFeatures.USER_FEATURE_KEY]: {

@@ -5,7 +5,6 @@ import * as fromFeatures from './post.reducer';
 import {
   getPostsLoaded,
   getPostEntities,
-  getPostsError,
   getAllPosts,
   selectFeaturesPostsState,
 } from './post.selectors';
