@@ -11,7 +11,7 @@ import { Dictionary } from '@ngrx/entity';
 
 describe('FeaturesFacadeService', () => {
   let service: FeaturesFacadeService;
-  let store: MockStore<any>;
+  let store: MockStore<{ posts: PostState; users: UserState }>;
   const helper = new HelperService();
   const postsList: Post[] = helper.convertPostEntityToPost(PostsArray);
   const postIds: number[] = postsList.map((post: Post) => post.id);
@@ -67,7 +67,7 @@ describe('FeaturesFacadeService', () => {
       });
 
       service = TestBed.inject(FeaturesFacadeService);
-      store = TestBed.inject<any>(MockStore);
+      store = TestBed.inject(MockStore);
     }));
 
     it('should be created', () => {
@@ -118,7 +118,7 @@ describe('FeaturesFacadeService', () => {
       });
 
       service = TestBed.inject(FeaturesFacadeService);
-      store = TestBed.inject<any>(MockStore);
+      store = TestBed.inject(MockStore);
     }));
 
     it('should be created', () => {

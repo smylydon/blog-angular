@@ -20,7 +20,7 @@ export class UserEffects {
               users: data || [],
             });
           }),
-          catchError((error: any) => {
+          catchError((error: Error) => {
             return of(UserActions.loadUsersFailure({ error }));
           })
         )

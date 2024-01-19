@@ -3,6 +3,7 @@ import { Post } from './post.model';
 import { PostActions } from './post.actions';
 import { posts as PostsArray } from './../../mocks';
 import { HelperService } from '../../services/index';
+import { Action } from '@ngrx/store';
 
 describe('Post Reducer', () => {
   const helper = new HelperService();
@@ -10,7 +11,7 @@ describe('Post Reducer', () => {
 
   describe('an unknown action', () => {
     it('should return the previous state', () => {
-      const action = {} as any;
+      const action = {} as Action;
 
       const result = postReducer(initialPostsState, action);
 

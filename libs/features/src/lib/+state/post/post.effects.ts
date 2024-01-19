@@ -21,7 +21,7 @@ export class PostEffects {
               posts,
             });
           }),
-          catchError((error: any) => {
+          catchError((error: Error) => {
             return of(PostActions.loadPostsFailure({ error }));
           })
         )
@@ -39,7 +39,7 @@ export class PostEffects {
               post,
             });
           }),
-          catchError((error: any) => {
+          catchError((error: Error) => {
             return of(PostActions.savePostFailure({ error }));
           })
         )
@@ -58,7 +58,7 @@ export class PostEffects {
               post_id: data,
             });
           }),
-          catchError((error: any) => {
+          catchError((error: Error) => {
             return of(PostActions.deletePostFailure({ error }));
           })
         )
@@ -80,7 +80,7 @@ export class PostEffects {
               update,
             });
           }),
-          catchError((error: any) => {
+          catchError((error: Error) => {
             return of(PostActions.updatePostFailure({ error }));
           })
         )

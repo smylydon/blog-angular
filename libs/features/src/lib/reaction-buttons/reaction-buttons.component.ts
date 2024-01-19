@@ -11,16 +11,16 @@ import { ReactionButtonCountPipe } from '../pipes/reaction-button-count.pipe';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'lib-reaction-buttons',
-    templateUrl: './reaction-buttons.component.html',
-    styleUrls: ['./reaction-buttons.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgFor, ReactionButtonCountPipe],
+  selector: 'lib-reaction-buttons',
+  templateUrl: './reaction-buttons.component.html',
+  styleUrls: ['./reaction-buttons.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgFor, ReactionButtonCountPipe],
 })
 export class ReactionButtonsComponent {
-  @Input() set post(post: any) {
-    this.aPost = post ? <Post>post : this.aPost;
+  @Input() set post(post: Post) {
+    this.aPost = post ? post : this.aPost;
   }
   aPost: Post = {
     id: 0,
@@ -39,7 +39,7 @@ export class ReactionButtonsComponent {
   @Output() newPost: EventEmitter<UpdateObject> =
     new EventEmitter<UpdateObject>();
   public reactionNames = ['thumbsUp', 'wow', 'heart', 'rocket', 'coffee'];
-  public reactionEmoji: any = {
+  public reactionEmoji: Record<string, string> = {
     thumbsUp: '👍',
     wow: '😮',
     heart: '❤️',

@@ -3,16 +3,16 @@ import { TimeAgoPipe } from '../pipes/time-ago.pipe';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'lib-time-ago',
-    templateUrl: './time-ago.component.html',
-    styleUrls: ['./time-ago.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgIf, TimeAgoPipe],
+  selector: 'lib-time-ago',
+  templateUrl: './time-ago.component.html',
+  styleUrls: ['./time-ago.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, TimeAgoPipe],
 })
 export class TimeAgoComponent {
-  @Input() set timestamp(timestamp: any) {
-    this.currentTimestamp = timestamp ?? '';
+  @Input() set timestamp(timestamp: unknown) {
+    this.currentTimestamp = <string>timestamp ?? '';
   }
   currentTimestamp = '';
 }

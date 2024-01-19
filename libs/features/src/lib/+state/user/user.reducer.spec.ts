@@ -1,11 +1,12 @@
 import { userReducer, initialUsersState } from './user.reducer';
 import { UserActions } from './user.actions';
 import { users as UsersArray } from '../../mocks';
+import { Action } from '@ngrx/store';
 
 describe('User Reducer', () => {
   describe('an unknown action', () => {
     it('should return the previous state', () => {
-      const action = {} as any;
+      const action = {} as Action;
 
       const result = userReducer(initialUsersState, action);
 
