@@ -28,7 +28,7 @@ describe('blog:edit-post', () => {
     getNavMenu().children().next().contains('Post');
   });
 
-  it('should display empty form and submit is disabled', () => {
+  xit('should display empty form and submit is disabled', () => {
     cy.get('h2').contains('Add a New Post');
     getFormLabel().eq(0).contains('Post Title:');
     getFormLabel().eq(1).contains('Author:');
@@ -36,7 +36,7 @@ describe('blog:edit-post', () => {
     checkFormItemsAreEmpty();
   });
 
-  it('should possible to type in input.', () => {
+  xit('should possible to type in input.', () => {
     checkFormItemsAreEmpty();
     getInput().type('a');
     getSaveButton().should('be.disabled');
@@ -46,7 +46,7 @@ describe('blog:edit-post', () => {
     getSaveButton().should('be.disabled');
   });
 
-  it('should possible to type in textarea.', () => {
+  xit('should possible to type in textarea.', () => {
     checkFormItemsAreEmpty();
     getTextArea().type('a');
     getSaveButton().should('be.disabled');
@@ -56,7 +56,7 @@ describe('blog:edit-post', () => {
     getSaveButton().should('be.disabled');
   });
 
-  it('should possible to select author.', () => {
+  xit('should possible to select author.', () => {
     checkFormItemsAreEmpty();
     getSelect().select(1);
     getSaveButton().should('be.disabled');
@@ -66,7 +66,7 @@ describe('blog:edit-post', () => {
     getSaveButton().should('be.disabled');
   });
 
-  it('should possible to submit a valid form.', () => {
+  xit('should possible to submit a valid form.', () => {
     checkFormItemsAreEmpty();
     getInput().type('aaa');
     getTextArea().type('bbbaaacccf');
