@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test && nx test features",
     "e2e": "nx e2e e2e",
-    "e2e:head": "nx e2e e2e --watch"
+    "e2e:head": "nx e2e e2e --watch",
+    "lint": "nx run blog:lint && nx run features:lint"
   },
   "private": true,
   "dependencies": {
