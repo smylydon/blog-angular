@@ -5,14 +5,22 @@ import {
   getSaveButton,
   getSelect,
   getTextArea,
+  getDeleteButton,
 } from '../support/app.po';
 
 describe('blog:edit-post', () => {
-  const checkFormItemsAreEmpty = () => {
-    getInput().should('have.value', '');
-    getTextArea().should('have.value', '');
-    getSaveButton().should('be.disabled');
-    getSelect().should('have.value', null);
+  const checkFormItemsAreNotEmpty = () => {
+    getInput().should(($p) => {
+      expect($p).not.to.have.length(0);
+      //expect($p.length).to.be.greaterThan(3);
+    });
+    getTextArea().should(($p) => {
+      expect($p).not.to.have.length(0);
+      //expect($p.length).to.be.greaterThan(3);
+    });
+    getSaveButton().should('not.be.disabled');
+    getDeleteButton().should('not.be.disabled');
+    getSelect().should('not.have.value', null);
   };
 
   beforeEach(() => cy.visit('/edit/1'));
@@ -28,52 +36,22 @@ describe('blog:edit-post', () => {
     getNavMenu().children().next().contains('Post');
   });
 
-  xit('should display empty form and submit is disabled', () => {
-    cy.get('h2').contains('Add a New Post');
+  it('should not display an empty form and submit and delete are enabled', () => {
+    cy.get('h2').contains('Edit Post');
     getFormLabel().eq(0).contains('Post Title:');
     getFormLabel().eq(1).contains('Author:');
     getFormLabel().eq(2).contains('Content:');
-    checkFormItemsAreEmpty();
-  });
-
-  xit('should possible to type in input.', () => {
-    checkFormItemsAreEmpty();
-    getInput().type('a');
-    getSaveButton().should('be.disabled');
-    getInput().type('a');
-    getSaveButton().should('be.disabled');
-    getInput().type('a');
-    getSaveButton().should('be.disabled');
-  });
-
-  xit('should possible to type in textarea.', () => {
-    checkFormItemsAreEmpty();
-    getTextArea().type('a');
-    getSaveButton().should('be.disabled');
-    getTextArea().type('a');
-    getSaveButton().should('be.disabled');
-    getTextArea().type('a');
-    getSaveButton().should('be.disabled');
-  });
-
-  xit('should possible to select author.', () => {
-    checkFormItemsAreEmpty();
-    getSelect().select(1);
-    getSaveButton().should('be.disabled');
-    getSelect().should('have.value', '1');
-    getSelect().select(10);
-    getSelect().should('have.value', '10');
-    getSaveButton().should('be.disabled');
+    checkFormItemsAreNotEmpty();
   });
 
   xit('should possible to submit a valid form.', () => {
-    checkFormItemsAreEmpty();
+    checkFormItemsAreNotEmpty();
     getInput().type('aaa');
     getTextArea().type('bbbaaacccf');
     getSelect().select(1);
     getSaveButton().should('not.be.disabled');
     getSaveButton().click();
     cy.url().should('eq', 'http://localhost:4200/');
-    checkFormItemsAreEmpty();
+    checkFormItemsAreNotEmpty();
   });
 });
