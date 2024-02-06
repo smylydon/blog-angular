@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from '../+state/post/post.model';
 
 @Pipe({
-    name: 'reactionCount',
-    standalone: true,
+  name: 'reactionCount',
+  standalone: true,
 })
 export class ReactionButtonCountPipe implements PipeTransform {
   transform(post: Post, name: string): string {
