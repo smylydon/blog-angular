@@ -21,5 +21,5 @@ jobs:
       - run: git branch --track main origin/main
 
       - run: npx nx format:check
-      - run: npx nx affected -t lint,test,build --parallel=3
-      - run: npm run e2e
+      - run: npx nx affected -t lint,test,test features,build --parallel=3
+      - run: npx nx e2e
