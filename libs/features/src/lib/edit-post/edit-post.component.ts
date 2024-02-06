@@ -4,7 +4,13 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Update } from '@ngrx/entity';
 
@@ -16,19 +22,15 @@ import { Post } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'lib-edit-post',
-    templateUrl: './edit-post.component.html',
-    styleUrls: ['./edit-post.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        NgFor,
-        AsyncPipe,
-    ],
+  selector: 'lib-edit-post',
+  templateUrl: './edit-post.component.html',
+  styleUrls: ['./edit-post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ReactiveFormsModule, AsyncPipe],
 })
 export class EditPostComponent implements OnInit, OnDestroy {
   public users$: Observable<UserEntity[]> = this.facade.justUsers$;

@@ -1,6 +1,7 @@
+@for(post of posts$ | async; track post.id) {
 <lib-a-post
-  *ngFor="let post of posts$ | async; trackBy: trackBy"
   [post]="post"
   [isSingle]="false"
   (update)="emitPost($event)"
 ></lib-a-post>
+}

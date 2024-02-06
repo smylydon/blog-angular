@@ -1,10 +1,7 @@
 <div>
-  <button
-    *ngFor="let emoji of reactionNames; trackBy: trackBy"
-    type="button"
-    class="reaction-button"
-    (click)="increment(emoji)"
-  >
+  @for( emoji of reactionNames; track $index) {
+  <button type="button" class="reaction-button" (click)="increment(emoji)">
     {{ reactionEmoji[emoji] }}{{ aPost | reactionCount : emoji }}
   </button>
+  }
 </div>

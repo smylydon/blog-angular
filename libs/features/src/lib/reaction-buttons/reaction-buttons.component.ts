@@ -8,7 +8,6 @@ import {
 
 import { Post, Reactions, UpdateObject } from '../+state/post/post.model';
 import { ReactionButtonCountPipe } from '../pipes/reaction-button-count.pipe';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'lib-reaction-buttons',
@@ -16,7 +15,7 @@ import { NgFor } from '@angular/common';
   styleUrls: ['./reaction-buttons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgFor, ReactionButtonCountPipe],
+  imports: [ReactionButtonCountPipe],
 })
 export class ReactionButtonsComponent {
   @Input() set post(post: Post) {
@@ -52,9 +51,5 @@ export class ReactionButtonsComponent {
       post: this.aPost,
       value: emoji as Reactions,
     });
-  }
-
-  public trackBy(index: number) {
-    return index;
   }
 }

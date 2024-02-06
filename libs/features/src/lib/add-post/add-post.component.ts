@@ -14,7 +14,7 @@ import { NewPost } from '../+state/post/post.model';
 
 import { UserEntity } from '../+state/user/user.model';
 import { FeaturesFacadeService } from '../+state/features-facade.service';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'lib-add-post',
@@ -22,7 +22,7 @@ import { NgFor, AsyncPipe } from '@angular/common';
   styleUrls: ['./add-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, AsyncPipe],
+  imports: [ReactiveFormsModule, AsyncPipe],
 })
 export class AddPostComponent implements OnInit {
   public users$: Observable<UserEntity[]> = this.facade.justUsers$;
@@ -60,9 +60,5 @@ export class AddPostComponent implements OnInit {
     };
     this.postForm.reset();
     this.facade.dispatch(PostActions.savePost({ post: newPost }));
-  }
-
-  trackBy(index: number, user: UserEntity) {
-    return user.id;
   }
 }

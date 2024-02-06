@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { isValid, parseISO, formatDistanceToNow } from 'date-fns';
 
 @Pipe({
-    name: 'timeAgo',
-    standalone: true,
+  name: 'timeAgo',
+  standalone: true,
 })
 export class TimeAgoPipe implements PipeTransform {
   transform(timestamp: string): unknown {
