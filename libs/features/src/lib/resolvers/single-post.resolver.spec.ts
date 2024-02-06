@@ -62,7 +62,6 @@ describe('singlePostResolver', () => {
         expect(facade.currentPostById).toHaveBeenCalledWith(value);
         (result as Observable<Post | undefined>).subscribe(
           (post: Post | undefined) => {
-            console.log(post?.id, mockPost.id);
             expect(post).toBe(mockPost);
             expect(post?.id).toBe(value);
             expect(post?.id).toBe(mockPost.id);
