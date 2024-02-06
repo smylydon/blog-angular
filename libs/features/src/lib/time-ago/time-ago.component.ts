@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TimeAgoPipe } from '../pipes/time-ago.pipe';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'lib-time-ago',
@@ -8,7 +7,7 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./time-ago.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, TimeAgoPipe],
+  imports: [TimeAgoPipe],
 })
 export class TimeAgoComponent {
   @Input() set timestamp(timestamp: unknown) {

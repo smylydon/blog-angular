@@ -1,12 +1,11 @@
+@if(post$|async) {
 <lib-a-post
-  *ngIf="post$ | async; else notFound"
   [post]="post$ | async"
   [isSingle]="true"
   (update)="emitPost($event)"
 ></lib-a-post>
-
-<ng-template #notFound>
-  <section>
-    <h2>Post not found!</h2>
-  </section>
-</ng-template>
+}@else {
+<section>
+  <h2>Post not found!</h2>
+</section>
+}
